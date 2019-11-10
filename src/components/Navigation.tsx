@@ -20,8 +20,8 @@ export const Navigation: React.FC<NavigationProps> = ({selectedStep = 'Macierz p
     </nav>;
 };
 
-const DotConnector: React.FC = () => <svg height="370" className={css({position: 'absolute', top: 0, left: 20})}>
-    <line x1="0" y1="0" x2="0" y2="370" className={css({stroke: 'white', strokeWidth:2})} />
+const DotConnector: React.FC = () => <svg height="390" className={css({position: 'absolute', top: 5, left: 20})}>
+    <line x1="0" y1="0" x2="0" y2="390" className={css({stroke: 'white', strokeWidth:2})} />
 </svg>;
 
 const DotIndicator: React.FC = () => <span className={dotIndicatorStyle}/>;

@@ -39,7 +39,7 @@ const typographyVariantStyles = {
     }),
 };
 
-const typographySizeStyle = (size: number) => css({size});
+const typographySizeStyle = (size: number) => css({fontSize: size});
 
 const typographyWeightStyle = {
     bold: css({
