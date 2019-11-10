@@ -1,10 +1,10 @@
 import React from 'react';
+import {Sidenav} from "./components/Sidenav";
+import 'normalize.css';
 
 const App: React.FC = () => {
   return (
-    <div>
-      PAM - Point Accepted Mutation
-    </div>
+    <Sidenav/>
   );
 };
 
