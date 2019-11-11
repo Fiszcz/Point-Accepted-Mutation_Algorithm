@@ -4,6 +4,7 @@ import 'normalize.css';
 import {StepPage} from "./components/StepPage";
 import {css} from "emotion";
 import {IntroductionPage} from "./pages/Introduction/IntroductionPage";
+import {EntrySequences} from "./pages/EntrySequences/EntrySequences";
 
 const App: React.FC = () => {
   return (
@@ -11,7 +12,7 @@ const App: React.FC = () => {
         <Sidenav/>
         <div className={css({height: '100%', position: 'relative'})}>
             <StepPage>
-                <IntroductionPage/>
+                <EntrySequences/>
             </StepPage>
         </div>
     </div>

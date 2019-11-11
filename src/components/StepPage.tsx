@@ -18,4 +18,5 @@ const stepPageStyle = css({
     color: theme.secondaryColor,
     textAlign: 'center',
     display: 'flex',
+    border: `3px solid ${theme.firstColor}`,
 });
