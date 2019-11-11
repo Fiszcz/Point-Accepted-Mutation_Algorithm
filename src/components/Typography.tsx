@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {css, cx} from "emotion";
 
-type typographyVariants = 'title' | 'headTitle' | 'text';
+type typographyVariants = 'title' | 'headTitle' | 'subtitle' | 'text';
 
 type typographyWeightVariants = 'bold' | 'normal' | 'light';
 
@@ -34,6 +34,11 @@ const typographyVariantStyles = {
         weight: 'bold',
     }),
     text: css({
+        fontFamily: 'Arial, Helvetica, sans-serif',
+        fontSize: 20,
+    }),
+    subtitle: css({
+        fontWeight: 'bold',
         fontFamily: 'Arial, Helvetica, sans-serif',
         fontSize: 20,
     }),

@@ -17,10 +17,8 @@ export const Sidenav: React.FC = () => {
 
 const sidenavStyle = css({
     backgroundColor: theme.firstColor,
-    width: '20%',
     height: '100%',
     overflowY: 'hidden',
-    position: 'absolute',
     color: 'white',
     padding: '0 25px',
 });

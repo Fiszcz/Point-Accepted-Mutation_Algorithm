@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Steps} from "../consts/steps";
 import {Typography} from "./Typography";
-import {css, cx} from "emotion";
+import {css} from "emotion";
 import {theme} from "./theme";
 
 interface NavigationProps {
@@ -11,7 +11,7 @@ interface NavigationProps {
 export const Navigation: React.FC<NavigationProps> = ({selectedStep = 'Macierz podstawień'}) => {
     return <nav className={css({position: 'relative'})}>
         {Steps.map(step =>
-            <div className={css({display: 'flex', alignItems: 'center', marginBottom: 45})}>
+            <div className={css({display: 'flex', alignItems: 'center', marginBottom: 45})} key={step}>
                 {selectedStep === step ? <SelectedDotIndicator/> : <DotIndicator/>}
                 <Typography size={24} weight={'light'} className={css({marginLeft: 20})}>{step}</Typography>
             </div>
