@@ -30,17 +30,17 @@ const typographyVariantStyles = {
     }),
     headTitle: css({
         fontFamily: 'Arial, Helvetica, sans-serif',
-        fontSize: 30,
+        fontSize: 22,
         weight: 'bold',
     }),
     text: css({
         fontFamily: 'Arial, Helvetica, sans-serif',
-        fontSize: 20,
+        fontSize: 15,
     }),
     subtitle: css({
         fontWeight: 'bold',
         fontFamily: 'Arial, Helvetica, sans-serif',
-        fontSize: 20,
+        fontSize: 15,
     }),
 };
 

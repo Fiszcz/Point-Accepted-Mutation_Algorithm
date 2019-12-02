@@ -3,30 +3,49 @@ import {Steps} from "../consts/steps";
 import {Typography} from "./Typography";
 import {css} from "emotion";
 import {theme} from "./theme";
+import {useDispatch, useSelector} from "react-redux";
+import {goToStep} from "../actions/steps/steps";
 
-interface NavigationProps {
-    selectedStep?: keyof typeof Steps,
-}
+export const Navigation: React.FC = () => {
+    const currentStep = useSelector((state: any) => state.step);
+    const dispatch = useDispatch();
 
-export const Navigation: React.FC<NavigationProps> = ({selectedStep = 'Macierz podstawień'}) => {
+    const handleGoToStep = (step: number) => () => {
+        dispatch(goToStep(step));
+    };
+
     return <nav className={css({position: 'relative'})}>
-        {Steps.map(step =>
-            <div className={css({display: 'flex', alignItems: 'center', marginBottom: 45})} key={step}>
-                {selectedStep === step ? <SelectedDotIndicator/> : <DotIndicator/>}
-                <Typography size={24} weight={'light'} className={css({marginLeft: 20})}>{step}</Typography>
+        {Steps.map((step, index) =>
+            <div className={stepStyle} key={step} onClick={handleGoToStep(index)}>
+                {currentStep === index ? <SelectedDotIndicator/> : <DotIndicator/>}
+                <Typography size={18} weight={'light'} className={stepText}>{step}</Typography>
             </div>
         )}
         <DotConnector/>
     </nav>;
 };
 
-const DotConnector: React.FC = () => <svg height="390" className={css({position: 'absolute', top: 5, left: 20})}>
+const DotConnector: React.FC = () => <svg height="390" className={css({position: 'absolute', top: 5, left: 20, width: 1})}>
     <line x1="0" y1="0" x2="0" y2="390" className={css({stroke: 'white', strokeWidth:2})} />
 </svg>;
 
 const DotIndicator: React.FC = () => <span className={dotIndicatorStyle}/>;
 
 const SelectedDotIndicator: React.FC = () => <span className={selectedDotIndicatorStyle}/>;
+
+const stepStyle = css({
+    '&:hover > *': {
+        cursor: 'pointer',
+        textDecoration: 'underline',
+    },
+    display: 'flex',
+    alignItems: 'center',
+    marginBottom: 45,
+});
+
+const stepText = css({
+    marginLeft: 20,
+});
 
 const dotIndicatorStyle = css({
     height: 25,

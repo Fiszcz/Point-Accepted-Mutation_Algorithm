@@ -17,4 +17,9 @@ const generateButtonStyle = css({
     borderRadius: '4px',
     color: theme.firstColor,
     padding: '14px 16px',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s',
+    '&:hover': {
+        backgroundColor: '#2699fb21',
+    },
 });
