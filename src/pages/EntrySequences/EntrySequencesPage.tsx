@@ -4,8 +4,26 @@ import {Typography} from "../../components/Typography";
 import {EntrySequencesTable} from "./EntrySequencesTable";
 import {JumpToNextStep} from "../../components/JumpToNextStep";
 import {GenerateButton} from "./GenerateButton";
+import {useState} from "react";
+import {generateRandomSequences} from "../../utils/sequences";
 
 export const EntrySequences = () => {
+    const [sequences, setSequences] = useState<string[]>([]);
+
+    const removeSequence = (index: number) => () => {
+        sequences.splice(index, 1);
+        setSequences([...sequences]);
+    };
+
+    const addSequence = (sequence: string) => {
+        if (sequence)
+            setSequences([...sequences, sequence]);
+    };
+
+    const handleGenerateSequences = () => {
+        setSequences(generateRandomSequences());
+    };
+
     return <div className={entrySequencesPageStyle}>
         <div className={css({display: 'grid', gridGap: '20%', justifyItems: 'center'})}>
             <Typography variant={"headTitle"}>
@@ -17,10 +35,10 @@ export const EntrySequences = () => {
                 sobą sekwencji białkowych.
             </Typography>
 
-            <GenerateButton/>
+            <GenerateButton onClick={handleGenerateSequences}/>
         </div>
 
-        <EntrySequencesTable/>
+        <EntrySequencesTable sequences={sequences} addSequence={addSequence} handleRemoveSequence={removeSequence}/>
 
         <div className={css({gridColumn: '1 / span 2', alignSelf: 'end'})}>
             <JumpToNextStep>Tworzenie drzewa filogenetycznego</JumpToNextStep>

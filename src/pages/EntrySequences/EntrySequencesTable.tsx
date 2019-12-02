@@ -4,10 +4,31 @@ import {Add, Clear} from "@material-ui/icons";
 import {css} from "emotion";
 import {theme} from "../../components/theme";
 import {Typography} from "../../components/Typography";
+import {useState} from "react";
 
-const data = ['12345678901234567890', 'TTTRFDXX', 'RXSSESEYYYY', "RXSSESEYYYY", 'SDFEESESE', 'TTTRFDXX', 'RXSSESEYYYY', "RXSSESEYYYY", 'SDFEESESE', 'TTTRFDXX', 'RXSSESEYYYY', "RXSSESEYYYY"];
+const letters = /^[A-Za-z]+$/;
 
-export const EntrySequencesTable = () => {
+interface EntrySequencesTableProps {
+    sequences: string[];
+
+    addSequence: (sequence: string) => void;
+    handleRemoveSequence: (index: number) => () => void;
+}
+
+export const EntrySequencesTable: React.FC<EntrySequencesTableProps> = (props) => {
+    const [newSequence, setNewSequence] = useState<string>('');
+
+    const handleChangeNewSequence = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const inputValue = event.target.value;
+        if (inputValue.match(letters) && inputValue.length < 14)
+            setNewSequence(inputValue.toUpperCase());
+    };
+
+    const handleDetectEnter = (event: React.KeyboardEvent) => {
+        if (event.keyCode === 13)
+            props.addSequence(newSequence);
+    };
+
     return <div className={css({width: '100%'})}>
         <Typography weight={'bold'}>
             Tablica sekwencji
@@ -24,7 +45,7 @@ export const EntrySequencesTable = () => {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {data.map((sequence, index) =>
+                {props.sequences.map((sequence, index) =>
                     <TableRow key={index}>
                         <TableCell className={tableCellStyle}>
                             <Typography weight={'bold'}>{index + 1}</Typography>
@@ -33,28 +54,31 @@ export const EntrySequencesTable = () => {
                             <TextField value={sequence} className={textFieldStyle}/>
                         </TableCell>
                         <TableCell className={tableCellStyle}>
-                            <IconButton>
+                            <IconButton onClick={props.handleRemoveSequence(index)}>
                                 <Clear className={removeSequenceButtonStyle}/>
                             </IconButton>
                         </TableCell>
                     </TableRow>
                 )}
             </TableBody>
-            <TableFooter>
-                <TableRow>
-                    <TableCell className={tableCellStyle}>
-                        <Typography weight={'bold'}>Nowa</Typography>
-                    </TableCell>
-                    <TableCell className={tableCellStyle}>
-                        <TextField value={'FFFGRERGDRGDR'} className={textFieldStyle}/>
-                    </TableCell>
-                    <TableCell className={tableCellStyle}>
-                        <IconButton>
-                            <Add className={addSequenceButtonStyle}/>
-                        </IconButton>
-                    </TableCell>
-                </TableRow>
-            </TableFooter>
+            {props.sequences.length < 10 &&
+                <TableFooter>
+                    <TableRow>
+                        <TableCell className={tableCellStyle}>
+                            <Typography weight={'bold'}>Nowa</Typography>
+                        </TableCell>
+                        <TableCell className={tableCellStyle}>
+                            <TextField value={newSequence} className={textFieldStyle} onChange={handleChangeNewSequence}
+                                       onKeyUp={handleDetectEnter}/>
+                        </TableCell>
+                        <TableCell className={tableCellStyle}>
+                            <IconButton onClick={() => props.addSequence(newSequence)}>
+                                <Add className={addSequenceButtonStyle}/>
+                            </IconButton>
+                        </TableCell>
+                    </TableRow>
+                </TableFooter>
+            }
         </Table>
     </div>;
 };
