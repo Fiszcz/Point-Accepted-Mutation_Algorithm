@@ -5,9 +5,10 @@ import {css} from "emotion";
 import {theme} from "./theme";
 import {useDispatch, useSelector} from "react-redux";
 import {goToStep} from "../actions/steps/steps";
+import {AppState} from "../store";
 
 export const Navigation: React.FC = () => {
-    const currentStep = useSelector((state: any) => state.step);
+    const currentStep = useSelector((state: AppState) => state.steps.step);
     const dispatch = useDispatch();
 
     const handleGoToStep = (step: number) => () => {

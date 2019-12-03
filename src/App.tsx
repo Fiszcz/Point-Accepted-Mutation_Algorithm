@@ -8,11 +8,10 @@ import {EntrySequences} from "./pages/EntrySequences/EntrySequencesPage";
 import {useSelector} from "react-redux";
 import {PAMSteps} from "./actions/steps/steps";
 import {PhylogeneticTree} from "./pages/PhylogeneticTree/PhylogeneticTreePage";
+import {AppState} from "./store";
 
 const App: React.FC = () => {
-    const elo = useSelector((state: any) => state);
-    console.log(elo);
-    const step = useSelector((state: any) => state.step);
+    const step = useSelector((state: AppState) => state.steps.step);
 
   const getStepPage = () => {
       switch(step) {

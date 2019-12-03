@@ -20,13 +20,18 @@ export const EntrySequencesTable: React.FC<EntrySequencesTableProps> = (props) =
 
     const handleChangeNewSequence = (event: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = event.target.value;
-        if (inputValue.match(letters) && inputValue.length < 14)
+        if ((inputValue.match(letters) && inputValue.length < 14) || inputValue === '')
             setNewSequence(inputValue.toUpperCase());
     };
 
     const handleDetectEnter = (event: React.KeyboardEvent) => {
         if (event.keyCode === 13)
-            props.addSequence(newSequence);
+            addSequence();
+    };
+
+    const addSequence = () => {
+        setNewSequence('');
+        props.addSequence(newSequence);
     };
 
     return <div className={css({width: '100%'})}>
@@ -72,7 +77,7 @@ export const EntrySequencesTable: React.FC<EntrySequencesTableProps> = (props) =
                                        onKeyUp={handleDetectEnter}/>
                         </TableCell>
                         <TableCell className={tableCellStyle}>
-                            <IconButton onClick={() => props.addSequence(newSequence)}>
+                            <IconButton onClick={addSequence}>
                                 <Add className={addSequenceButtonStyle}/>
                             </IconButton>
                         </TableCell>

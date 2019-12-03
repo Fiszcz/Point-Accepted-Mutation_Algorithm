@@ -14,10 +14,10 @@ export const StepPage: React.FC<StepPageProps> = ({children, className}) => {
 
 const stepPageStyle = css({
     position: 'absolute',
-    top: 40,
-    bottom: 40,
-    left: 40,
-    right: 40,
+    top: 30,
+    bottom: 30,
+    left: 30,
+    right: 30,
     backgroundColor: theme.thirdColor,
     color: theme.secondaryColor,
     textAlign: 'center',

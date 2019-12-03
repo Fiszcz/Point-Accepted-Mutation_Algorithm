@@ -1,18 +1,15 @@
 import * as React from 'react';
+import {useEffect} from 'react';
 import {css} from "emotion";
-import {useEffect} from "react";
 import {generateTreeDiagram} from "./PhylogeneticTree";
 import {Typography} from "../../components/Typography";
-import {Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
 import {theme} from "../../components/theme";
-
-const data = ['12345678901234567890', 'TTTRFDXX', 'RXSSESEYYYY', "RXSSESEYYYY", 'SDFEESESE', 'TTTRFDXX', 'RXSSESEYYYY', "RXSSESEYYYY", 'SDFEESESE', 'TTTRFDXX', 'RXSSESEYYYY', "RXSSESEYYYY"];
 
 export const PhylogeneticTree = () => {
     useEffect(() => generateTreeDiagram(), []);
 
     return <div className={phylogeneticTreePageStyle}>
-        <div>
+        <div className={phylogeneticTreePageStyle}>
             <Typography variant={"headTitle"}>
                 Drzewo filogenetyczne
             </Typography>
@@ -28,30 +25,7 @@ export const PhylogeneticTree = () => {
             </Typography>
         </div>
 
-        <div className={css({display: 'flex'})}>
-            <Table size={"small"}>
-                <TableHead>
-                    <TableCell className={tableCellStyle}>
-                        <Typography weight={"bold"}>lp.</Typography>
-                    </TableCell>
-                    <TableCell className={tableCellStyle}>
-                        <Typography weight={"bold"}>Sekwencja</Typography>
-                    </TableCell>
-                </TableHead>
-                <TableBody>
-                    {data.map((sequence, index) => (
-                        <TableRow>
-                            <TableCell className={tableCellStyle}>
-                                <Typography weight={'bold'} size={21}>{index + 1}</Typography>
-                            </TableCell>
-                            <TableCell className={tableCellStyle}>
-                                <Typography>{sequence}</Typography>
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-
+        <div className={phylogeneticTreePageStyle}>
             <div id={'phylogeneticTree'}/>
         </div>
     </div>
@@ -70,5 +44,5 @@ const phylogeneticTreePageStyle = css({
     display: 'grid',
     justifyItems: 'center',
     alignItems: 'center',
-    margin: '5% 5%',
+    margin: '3% 3%',
 });

@@ -4,24 +4,27 @@ import {Typography} from "../../components/Typography";
 import {EntrySequencesTable} from "./EntrySequencesTable";
 import {JumpToNextStep} from "../../components/JumpToNextStep";
 import {GenerateButton} from "./GenerateButton";
-import {useState} from "react";
 import {generateRandomSequences} from "../../utils/sequences";
+import {useDispatch, useSelector} from "react-redux";
+import {setSequences} from "../../actions/sequences/sequences";
+import {AppState} from "../../store";
 
 export const EntrySequences = () => {
-    const [sequences, setSequences] = useState<string[]>([]);
+    const sequences = useSelector((state: AppState) => state.sequences.sequences);
+    const dispatch = useDispatch();
 
     const removeSequence = (index: number) => () => {
         sequences.splice(index, 1);
-        setSequences([...sequences]);
+        dispatch(setSequences([...sequences]));
     };
 
     const addSequence = (sequence: string) => {
         if (sequence)
-            setSequences([...sequences, sequence]);
+            dispatch(setSequences([...sequences, sequence]));
     };
 
     const handleGenerateSequences = () => {
-        setSequences(generateRandomSequences());
+        dispatch(setSequences(generateRandomSequences()));
     };
 
     return <div className={entrySequencesPageStyle}>
