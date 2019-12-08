@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {css} from "emotion";
 import {Typography} from "../../components/Typography";
-import {EntrySequencesTable} from "./EntrySequencesTable";
+import {EntrySequencesTable, letters} from "./EntrySequencesTable";
 import {JumpToNextStep} from "../../components/JumpToNextStep";
 import {GenerateButton} from "./GenerateButton";
 import {generateRandomSequences} from "../../utils/sequences";
@@ -27,6 +27,13 @@ export const EntrySequences = () => {
         dispatch(setSequences(generateRandomSequences()));
     };
 
+    const editSequence = (index: number, sequence: string) => {
+        if ((sequence.match(letters) && sequence.length < 14) || sequence === '') {
+            sequences[index] = sequence.toUpperCase();
+            dispatch(setSequences([...sequences]));
+        }
+    };
+
     return <div className={entrySequencesPageStyle}>
         <div className={css({display: 'grid', gridGap: '20%', justifyItems: 'center'})}>
             <Typography variant={"headTitle"}>
@@ -41,7 +48,7 @@ export const EntrySequences = () => {
             <GenerateButton onClick={handleGenerateSequences}/>
         </div>
 
-        <EntrySequencesTable sequences={sequences} addSequence={addSequence} handleRemoveSequence={removeSequence}/>
+        <EntrySequencesTable sequences={sequences} addSequence={addSequence} handleRemoveSequence={removeSequence} handleChangeSequence={editSequence}/>
 
         <div className={css({gridColumn: '1 / span 2', alignSelf: 'end'})}>
             <JumpToNextStep>Tworzenie drzewa filogenetycznego</JumpToNextStep>

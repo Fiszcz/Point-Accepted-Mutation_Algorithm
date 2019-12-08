@@ -6,13 +6,14 @@ import {theme} from "../../components/theme";
 import {Typography} from "../../components/Typography";
 import {useState} from "react";
 
-const letters = /^[A-Za-z]+$/;
+export const letters = /^[A-Za-z]+$/;
 
 interface EntrySequencesTableProps {
     sequences: string[];
 
     addSequence: (sequence: string) => void;
     handleRemoveSequence: (index: number) => () => void;
+    handleChangeSequence: (index: number, newValue: string) => void;
 }
 
 export const EntrySequencesTable: React.FC<EntrySequencesTableProps> = (props) => {
@@ -32,6 +33,10 @@ export const EntrySequencesTable: React.FC<EntrySequencesTableProps> = (props) =
     const addSequence = () => {
         setNewSequence('');
         props.addSequence(newSequence);
+    };
+
+    const handleChangeSequence = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+        props.handleChangeSequence(index, event.target.value);
     };
 
     return <div className={css({width: '100%'})}>
@@ -56,7 +61,7 @@ export const EntrySequencesTable: React.FC<EntrySequencesTableProps> = (props) =
                             <Typography weight={'bold'}>{index + 1}</Typography>
                         </TableCell>
                         <TableCell className={tableCellStyle}>
-                            <TextField value={sequence} className={textFieldStyle}/>
+                            <TextField value={sequence} className={textFieldStyle} onChange={handleChangeSequence(index)}/>
                         </TableCell>
                         <TableCell className={tableCellStyle}>
                             <IconButton onClick={props.handleRemoveSequence(index)}>
