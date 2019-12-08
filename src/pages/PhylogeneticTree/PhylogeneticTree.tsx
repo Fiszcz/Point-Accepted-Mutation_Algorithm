@@ -24,57 +24,11 @@ const linkStyle = css({
     strokeWidth: 2,
 });
 
-const treeData: any = {
-        "name": "TSDFHEREDSRE",
-        "parent": "null",
-        "children": [
-            {
-                "name": "TSDFHEREDSRE",
-                "parent": "Top Level",
-                "children": [
-                    {
-                        "name": "TSDFHEREDSRE",
-                        "parent": "Level 2: A",
-                        "children": [
-                            {
-                                "name": "TSDFHEREDSRE",
-                                "parent": "Level 2: A"
-                            },
-                            {
-                                "name": "TSDFHEREDSRE",
-                                "parent": "Level 2: A"
-                            }
-                        ]
-                    },
-                    {
-                        "name": "TSDFHEREDSRE",
-                        "parent": "Level 2: A",
-
-                    }
-                ]
-            },
-            {
-                "name": "TSDFHEREDSRE",
-                "parent": "Top Level",
-                "children": [
-                    {
-                        "name": "TSDFHEREDSRE",
-                        "parent": "Level 2: A"
-                    },
-                    {
-                        "name": "TSDFHEREDSRE",
-                        "parent": "Level 2: A"
-                    }
-                ]
-            }
-        ]
-    };
-
-export const generateTreeDiagram = () => {
-    update();
+export const generateTreeDiagram = (treeData: any) => {
+    update(treeData);
 };
 
-function update() {
+function update(treeData: any) {
 
     const margin = {top: 20, right: 120, bottom: 20, left: 200};
     const width = 900 - margin.right - margin.left;
