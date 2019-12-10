@@ -1,17 +1,21 @@
 import * as React from 'react';
 import {Typography} from "../../components/Typography";
 import {css} from "emotion";
+import {PamMatrix} from "./PAMMatrix";
 
 export const PamMatrixPage = () => {
     return <div className={PAMMatrixPageStyle}>
         <div>
-            <Typography variant={"headTitle"}>
+            <Typography variant={"title"}>
                 Macierz PAM1
             </Typography>
             <br/>
-            <Typography>
+            <Typography variant={"headTitle"}>
                 Otrzymujemy na wyjściu macierz PAM 1.
             </Typography>
+        </div>
+        <div>
+            <PamMatrix/>
         </div>
     </div>;
 };

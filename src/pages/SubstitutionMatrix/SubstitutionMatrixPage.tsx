@@ -1,13 +1,12 @@
 import * as React from 'react';
+import {useState} from 'react';
 import {Typography} from "../../components/Typography";
-import {css, cx} from "emotion";
+import {css} from "emotion";
 import {NextStep} from "../../components/NextStep";
 import {SubstitutionMatrix} from "./SubstitutionMatrix";
-import {useState} from "react";
 import {PreviousStep} from "../../components/PreviousStep";
 import {FirstStep} from "./FirstStep";
 import {Divider} from "@material-ui/core";
-import {SecondStep} from "./SecondStep";
 import {ThirdStep} from "./ThirdStep";
 import {JumpToNextStep} from "../../components/JumpToNextStep";
 
