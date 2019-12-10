@@ -16,17 +16,14 @@ export const createCompleteGraphFromSequences = (sequences: string[]): Graph => 
 
 export interface TreeData {
     name: string;
-    parent: string;
     children?: TreeData[];
 }
 
 export const buildTreeDataFromGraph = (graph: Graph, sequences: string[]): TreeData => {
     const treeData: TreeData = {
         name: String(graph[0][0]),
-        parent: '',
         children: [{
             name: String(graph[0][1]),
-            parent: '',
         }],
     };
 
@@ -37,15 +34,17 @@ export const buildTreeDataFromGraph = (graph: Graph, sequences: string[]): TreeD
         let fromVertexNode = searchInTree(treeData, firstVertex);
         if (fromVertexNode) {
             if (fromVertexNode!.children) {
-                fromVertexNode!.children.push({name: secondVertex, parent: ''});
+                fromVertexNode!.children.push({name: secondVertex});
             } else
-                fromVertexNode!.children = [{name: secondVertex, parent: ''}];
+                fromVertexNode!.children = [{name: secondVertex}];
         } else {
             fromVertexNode = searchInTree(treeData, secondVertex);
-            if (fromVertexNode!.children) {
-                fromVertexNode!.children.push({name: firstVertex, parent: ''});
-            } else
-                fromVertexNode!.children = [{name: firstVertex, parent: ''}];
+            if (fromVertexNode) {
+                if (fromVertexNode!.children) {
+                    fromVertexNode!.children.push({name: firstVertex});
+                } else
+                    fromVertexNode!.children = [{name: firstVertex}];
+            }
         }
     }
 

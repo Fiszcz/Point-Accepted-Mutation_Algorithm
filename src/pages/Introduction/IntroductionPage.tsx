@@ -26,7 +26,6 @@ export const IntroductionPage = () => {
                 (podstawienia jednej pary zasad przez inną).
             </Typography>
         </div>
-
         <div>
             <Typography variant={"subtitle"}>
                 Macierz PAM

@@ -50,11 +50,13 @@ export const EntrySequences = () => {
 
         <EntrySequencesTable sequences={sequences} addSequence={addSequence} handleRemoveSequence={removeSequence} handleChangeSequence={editSequence}/>
 
-        <div className={css({gridColumn: '1 / span 2', alignSelf: 'end'})}>
+        <div className={goToNextStepStyle}>
             <JumpToNextStep>Tworzenie drzewa filogenetycznego</JumpToNextStep>
         </div>
     </div>
 };
+
+const goToNextStepStyle = css({gridColumn: '1 / span 2', alignSelf: 'end'});
 
 const entrySequencesPageStyle = css({
     display: 'grid',

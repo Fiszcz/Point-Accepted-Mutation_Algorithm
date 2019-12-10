@@ -10,14 +10,18 @@ export const generateRandomSequences = () => {
 
     let theMostPossibleCharacters = '';
     for (let i = 0; i < lengthOfSequences; i++) {
-        theMostPossibleCharacters += possibleCharacters[randomIntFromInterval(0, possibleCharacters.length-1)];
+        theMostPossibleCharacters += (theMostPossibleCharacters.length === 0 || Math.random() > 0.35) ? possibleCharacters[randomIntFromInterval(0, possibleCharacters.length-1)]
+        : theMostPossibleCharacters[randomIntFromInterval(0, theMostPossibleCharacters.length - 1)];
     }
 
     const sequences = [];
     for (let i = 0; i < numberRandomSequences; i++) {
         let sequence = '';
         for (let n = 0; n < lengthOfSequences; n++) {
-            sequence += Math.random() > 0.7 ? possibleCharacters[randomIntFromInterval(0, possibleCharacters.length-1)] : theMostPossibleCharacters[n];
+            sequence += Math.random() > 0.70 ?
+                (Math.random() > 0.95 ? possibleCharacters[randomIntFromInterval(0, possibleCharacters.length - 1)]
+                    : theMostPossibleCharacters[randomIntFromInterval(0, theMostPossibleCharacters.length - 1)])
+                : theMostPossibleCharacters[n];
         }
         sequences.push(sequence);
     }

@@ -4,18 +4,24 @@ import {css, cx} from "emotion";
 import {generateTreeDiagram} from "./PhylogeneticTree";
 import {Typography} from "../../components/Typography";
 import {buildTreeDataFromGraph, createCompleteGraphFromSequences} from "../../utils/graphs";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../store";
 import {primAlgorithm} from "../../utils/primAlgorithm";
 import {JumpToNextStep} from "../../components/JumpToNextStep";
+import {setTree} from "../../actions/tree/tree";
+import {computeSubstitutionMatrix} from "../../actions/substitutionMatrix/substitutionMatrix";
 
 export const PhylogeneticTree = () => {
     const sequences = useSelector((state: AppState) => state.sequences.sequences);
+    const dispatch = useDispatch();
+    
     useEffect(() => {
         const graphFromSequences = createCompleteGraphFromSequences(sequences);
         const minimumSpanningTree = primAlgorithm(sequences.length, graphFromSequences);
         const treeData = buildTreeDataFromGraph(minimumSpanningTree, sequences);
-        generateTreeDiagram(treeData)
+        dispatch(setTree(treeData));
+        generateTreeDiagram(treeData);
+        dispatch(computeSubstitutionMatrix(treeData, sequences));
     }, [sequences]);
 
     return <div className={phylogeneticTreePageStyle}>
@@ -35,7 +41,7 @@ export const PhylogeneticTree = () => {
             </Typography>
         </div>
 
-        <div className={cx(phylogeneticTreePageStyle, css({width: 900, height: 500}))}>
+        <div className={cx(phylogeneticTreePageStyle, css({width: 1150, height: 500}))}>
             <div id={'phylogeneticTree'}/>
         </div>
 

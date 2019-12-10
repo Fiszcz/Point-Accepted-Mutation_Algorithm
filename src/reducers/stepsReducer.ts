@@ -1,4 +1,4 @@
-import {PAMSteps, StepsActions} from "../../actions/steps/steps";
+import {PAMSteps, StepsActions} from "../actions/steps/steps";
 
 const initialState = {
     step: PAMSteps.WSTEP,

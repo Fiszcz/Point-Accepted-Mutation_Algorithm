@@ -1,10 +1,14 @@
-import {stepsReducer} from "../reducers/steps/stepsReducer";
 import {createStore, combineReducers} from 'redux';
-import {sequencesReducer} from "../reducers/sequences/sequencesReducer";
+import {stepsReducer} from "../reducers/stepsReducer";
+import {sequencesReducer} from "../reducers/sequencesReducer";
+import {treeReducer} from "../reducers/treeReducer";
+import {substitutionMatrixReduce} from "../reducers/substitutionMatrixReducer";
 
 const rootReducer = combineReducers({
     steps: stepsReducer,
-    sequences: sequencesReducer
+    sequences: sequencesReducer,
+    tree: treeReducer,
+    substitutionMatrix: substitutionMatrixReduce,
 });
 
 export function configureStore() {

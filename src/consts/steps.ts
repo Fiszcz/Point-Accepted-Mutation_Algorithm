@@ -1,1 +1,1 @@
-export const Steps = ['Wstęp', 'Sekwencje wejściowe', 'Drzewo filogenetyczne', 'Macierz podstawień', 'Macierz PAM', 'Ekstrapolacja PAM'];
+export const Steps = ['Wstęp', 'Sekwencje wejściowe', 'Drzewo filogenetyczne', 'Macierz podstawień', 'Macierz PAM'];

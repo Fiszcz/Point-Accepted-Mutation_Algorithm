@@ -27,7 +27,7 @@ export const Navigation: React.FC = () => {
 };
 
 const DotConnector: React.FC = () => <svg height="390" className={css({position: 'absolute', top: 5, left: 20, width: 1})}>
-    <line x1="0" y1="0" x2="0" y2="385" className={css({stroke: 'white', strokeWidth:2})} />
+    <line x1="0" y1="0" x2="0" y2="300" className={css({stroke: 'white', strokeWidth:2})} />
 </svg>;
 
 const DotIndicator: React.FC = () => <span className={dotIndicatorStyle}/>;

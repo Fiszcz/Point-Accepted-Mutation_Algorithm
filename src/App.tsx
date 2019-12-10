@@ -9,6 +9,7 @@ import {useSelector} from "react-redux";
 import {PAMSteps} from "./actions/steps/steps";
 import {PhylogeneticTree} from "./pages/PhylogeneticTree/PhylogeneticTreePage";
 import {AppState} from "./store";
+import {SubstitutionMatrixPage} from "./pages/SubstitutionMatrix/SubstitutionMatrixPage";
 
 const App: React.FC = () => {
     const step = useSelector((state: AppState) => state.steps.step);
@@ -21,6 +22,8 @@ const App: React.FC = () => {
               return <EntrySequences/>;
           case PAMSteps.DRZEWO_FILOGENETYCZNE:
               return <PhylogeneticTree/>;
+          case PAMSteps.MACIERZ_PODSTAWIEN:
+              return <SubstitutionMatrixPage/>
       }
   };
 
