@@ -16,13 +16,14 @@ export const PhylogeneticTree = () => {
     const dispatch = useDispatch();
     
     useEffect(() => {
-        const graphFromSequences = createCompleteGraphFromSequences(sequences);
-        const minimumSpanningTree = primAlgorithm(sequences.length, graphFromSequences);
-        const treeData = buildTreeDataFromGraph(minimumSpanningTree, sequences);
+        const uppercaseSequences = sequences.map((sequence) => sequence.toUpperCase());
+        const graphFromSequences = createCompleteGraphFromSequences(uppercaseSequences);
+        const minimumSpanningTree = primAlgorithm(uppercaseSequences.length, graphFromSequences);
+        const treeData = buildTreeDataFromGraph(minimumSpanningTree, uppercaseSequences);
         dispatch(setTree(treeData));
         generateTreeDiagram(treeData);
-        dispatch(computeSubstitutionMatrix(treeData, sequences));
-    }, [sequences]);
+        dispatch(computeSubstitutionMatrix(treeData, uppercaseSequences));
+    }, [sequences, dispatch]);
 
     return <div className={phylogeneticTreePageStyle}>
         <div className={phylogeneticTreePageStyle}>

@@ -29,7 +29,7 @@ export const EntrySequences = () => {
 
     const editSequence = (index: number, sequence: string) => {
         if ((sequence.match(letters) && sequence.length < 14) || sequence === '') {
-            sequences[index] = sequence.toUpperCase();
+            sequences[index] = sequence;
             dispatch(setSequences([...sequences]));
         }
     };
@@ -48,7 +48,7 @@ export const EntrySequences = () => {
             <GenerateButton onClick={handleGenerateSequences}/>
         </div>
 
-        <EntrySequencesTable sequences={sequences} addSequence={addSequence} handleRemoveSequence={removeSequence} handleChangeSequence={editSequence}/>
+        <EntrySequencesTable addSequence={addSequence} handleRemoveSequence={removeSequence} handleChangeSequence={editSequence}/>
 
         <div className={goToNextStepStyle}>
             <JumpToNextStep>Tworzenie drzewa filogenetycznego</JumpToNextStep>

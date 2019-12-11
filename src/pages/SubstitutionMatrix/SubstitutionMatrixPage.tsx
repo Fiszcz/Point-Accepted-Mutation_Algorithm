@@ -22,7 +22,7 @@ export const SubstitutionMatrixPage = () => {
     };
 
     return <div className={substitutionMatrixPageStyle}>
-        <div>
+        <div className={css({padding: '0% 2%'})}>
             <Typography variant={"headTitle"}>
                 Macierz podstawień
             </Typography>
@@ -125,6 +125,6 @@ const substitutionMatrixPageStyle = css({
     display: 'grid',
     justifyItems: 'center',
     alignItems: 'center',
-    padding: '5% 10%',
+    padding: '5% 0%',
     width: '100%',
 });

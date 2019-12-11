@@ -1,14 +1,17 @@
 import * as React from 'react';
 import {Steps} from "../consts/steps";
 import {Typography} from "./Typography";
-import {css} from "emotion";
+import {css, cx} from "emotion";
 import {theme} from "./theme";
 import {useDispatch, useSelector} from "react-redux";
-import {goToStep} from "../actions/steps/steps";
+import {goToStep, PAMSteps} from "../actions/steps/steps";
 import {AppState} from "../store";
 
 export const Navigation: React.FC = () => {
     const currentStep = useSelector((state: AppState) => state.steps.step);
+    const hasSequences = useSelector((state: AppState) => state.sequences.sequences.length);
+    const hasComputedSubstitutionMatrix = useSelector((state: AppState) => state.substitutionMatrix.substitutionMatrix.length);
+
     const dispatch = useDispatch();
 
     const handleGoToStep = (step: number) => () => {
@@ -16,12 +19,15 @@ export const Navigation: React.FC = () => {
     };
 
     return <nav className={css({position: 'relative'})}>
-        {Steps.map((step, index) =>
-            <div className={stepStyle} key={step} onClick={handleGoToStep(index)}>
+        {Steps.map((step, index) => {
+            const isDisabled = (index > PAMSteps.SEKWENCJE_WEJSCIOWE && !hasSequences)
+                || (index > PAMSteps.DRZEWO_FILOGENETYCZNE && !hasComputedSubstitutionMatrix);
+
+            return <div className={cx(stepStyle, !isDisabled && activeButtonStyle)} key={step} onClick={isDisabled ? () => {} : handleGoToStep(index)}>
                 {currentStep === index ? <SelectedDotIndicator/> : <DotIndicator/>}
-                <Typography size={18} weight={'light'} className={stepText}>{step}</Typography>
+                <Typography size={18} weight={'light'} className={cx(stepText, isDisabled && css({color: '#797979ba'}))}>{step}</Typography>
             </div>
-        )}
+        })}
         <DotConnector/>
     </nav>;
 };
@@ -35,13 +41,16 @@ const DotIndicator: React.FC = () => <span className={dotIndicatorStyle}/>;
 const SelectedDotIndicator: React.FC = () => <span className={selectedDotIndicatorStyle}/>;
 
 const stepStyle = css({
+    display: 'flex',
+    alignItems: 'center',
+    marginBottom: 45,
+});
+
+const activeButtonStyle = css({
     '&:hover > *': {
         cursor: 'pointer',
         textDecoration: 'underline',
     },
-    display: 'flex',
-    alignItems: 'center',
-    marginBottom: 45,
 });
 
 const stepText = css({

@@ -4,19 +4,20 @@ import {Add, Clear} from "@material-ui/icons";
 import {css} from "emotion";
 import {theme} from "../../components/theme";
 import {Typography} from "../../components/Typography";
-import {useState} from "react";
+import {useCallback, useState} from "react";
+import {useSelector} from "react-redux";
+import {AppState} from "../../store";
 
 export const letters = /^[A-Za-z]+$/;
 
 interface EntrySequencesTableProps {
-    sequences: string[];
-
     addSequence: (sequence: string) => void;
     handleRemoveSequence: (index: number) => () => void;
     handleChangeSequence: (index: number, newValue: string) => void;
 }
 
 export const EntrySequencesTable: React.FC<EntrySequencesTableProps> = (props) => {
+    const sequences = useSelector((state: AppState) => state.sequences.sequences);
     const [newSequence, setNewSequence] = useState<string>('');
 
     const handleChangeNewSequence = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,9 +36,9 @@ export const EntrySequencesTable: React.FC<EntrySequencesTableProps> = (props) =
         props.addSequence(newSequence);
     };
 
-    const handleChangeSequence = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
-        props.handleChangeSequence(index, event.target.value);
-    };
+    const handleChangeSequence = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+        props.handleChangeSequence(Number(event.target.name), event.target.value);
+    }, []);
 
     return <div className={css({width: '100%'})}>
         <Typography weight={'bold'}>
@@ -55,13 +56,13 @@ export const EntrySequencesTable: React.FC<EntrySequencesTableProps> = (props) =
                 </TableRow>
             </TableHead>
             <TableBody>
-                {props.sequences.map((sequence, index) =>
+                {sequences.map((sequence, index) =>
                     <TableRow key={index}>
                         <TableCell className={tableCellStyle}>
                             <Typography weight={'bold'}>{index + 1}</Typography>
                         </TableCell>
                         <TableCell className={tableCellStyle}>
-                            <TextField value={sequence} className={textFieldStyle} onChange={handleChangeSequence(index)}/>
+                            <TextField value={sequence} className={textFieldStyle} onChange={handleChangeSequence} name={index.toString()}/>
                         </TableCell>
                         <TableCell className={tableCellStyle}>
                             <IconButton onClick={props.handleRemoveSequence(index)}>
@@ -71,7 +72,7 @@ export const EntrySequencesTable: React.FC<EntrySequencesTableProps> = (props) =
                     </TableRow>
                 )}
             </TableBody>
-            {props.sequences.length < 10 &&
+            {sequences.length < 10 &&
                 <TableFooter>
                     <TableRow>
                         <TableCell className={tableCellStyle}>
@@ -99,7 +100,10 @@ const textFieldStyle = css({
         // @ts-ignore
         textAlign: 'center !important',
         color: theme.secondaryColor,
-    }
+    },
+    'input': {
+        textTransform: 'uppercase',
+    },
 });
 
 const tableStyle = css({

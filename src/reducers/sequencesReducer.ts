@@ -12,7 +12,7 @@ const initialState: SequencesState  = {
 };
 
 export function sequencesReducer(state = initialState, action: SetSequences) {
-    if (action.sequences)
+    if (action.type === 'SET_SEQUENCES')
         return {sequences: action.sequences, uniqueSymbols: getUniqueSymbols(action.sequences)};
     return state;
 };

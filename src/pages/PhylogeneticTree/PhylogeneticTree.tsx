@@ -30,7 +30,7 @@ export const generateTreeDiagram = (treeData: any) => {
 
 function update(treeData: any) {
 
-    const margin = {top: 20, right: 0, bottom: 20, left: 150};
+    const margin = {top: 20, right: 0, bottom: 20, left: 165};
     const width = 1150 - margin.right - margin.left;
     const height = 500 - margin.top - margin.bottom;
 

@@ -7,8 +7,8 @@ import {Authors} from "./Authors";
 
 export const Sidenav: React.FC = () => {
     return <div className={sidenavStyle}>
-        <Typography className={css({margin: '30px 0'})}>
-            PAM <br/> Program demonstracyjny
+        <Typography className={css({margin: '30px 0'})} size={20}>
+            PAM <br/> Program demonstracyjny <br/> (wersja prototypowa)
         </Typography>
         <Navigation/>
         <Authors/>

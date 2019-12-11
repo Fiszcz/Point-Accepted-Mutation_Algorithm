@@ -14,9 +14,7 @@ export const PamMatrixPage = () => {
                 Otrzymujemy na wyjściu macierz PAM 1.
             </Typography>
         </div>
-        <div>
-            <PamMatrix/>
-        </div>
+        <PamMatrix/>
     </div>;
 };
 
