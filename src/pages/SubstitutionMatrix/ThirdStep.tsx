@@ -12,7 +12,7 @@ export const ThirdStep = () => {
 
     return <div className={css({width: '100%'})}>
         <div>
-            <Typography variant={"subtitle"}>Wzór na wartość Lamda:</Typography>
+            <Typography variant={"subtitle"}>Wzór na wartość Lambda:</Typography>
             <br/>
             <div className={css({'& > *': {fontSize: 30}})}>
             {React.createElement(Latex, null, "\$\\lambda = 0.01 \\frac {N} {\\sum\\sum A_{ij}}$")}

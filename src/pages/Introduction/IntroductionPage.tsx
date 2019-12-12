@@ -17,20 +17,20 @@ export const IntroductionPage = () => {
         </div>
 
         <div>
-            <Typography variant={"subtitle"}>
+            <Typography variant={"subtitle"} size={22}>
                 Macierz punktowania substytucji aminokwasowych
             </Typography>
-            <Typography>
+            <Typography variant={"headTitle"}>
                 Odzwierciedlają prawdopodobieństwo substytucji aminokwasowych
                 <br/>
                 (podstawienia jednej pary zasad przez inną).
             </Typography>
         </div>
         <div>
-            <Typography variant={"subtitle"}>
+            <Typography variant={"subtitle"} size={22}>
                 Macierz PAM
             </Typography>
-            <Typography>
+            <Typography variant={"headTitle"}>
                 Jest empiryczną macierzą punktowania substytucji aminokwasowych.
                 <br/>
                 Tworzona jest na podstawie przyrównań wysoce podobnych sekwencji.
@@ -43,8 +43,8 @@ export const IntroductionPage = () => {
         </div>
 
         <div className={css({display: 'flex'})}>
-            <Typography size={23} weight={"bold"} className={css({padding: 20})}>Agnieszka Dąbrowska</Typography>
-            <Typography size={23} weight={"bold"} className={css({padding: 20})}>Filip Szcześniak</Typography>
+            <Typography size={23} weight={"bold"} className={authorTypography}>Agnieszka Dąbrowska</Typography>
+            <Typography size={23} weight={"bold"} className={authorTypography}>Filip Szcześniak</Typography>
         </div>
 
         <JumpToNextStep>
@@ -52,6 +52,10 @@ export const IntroductionPage = () => {
         </JumpToNextStep>
     </div>
 };
+
+const authorTypography = css({
+    padding: 20,
+});
 
 const introductionPageStyle = css({
     display: 'grid',

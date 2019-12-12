@@ -11,7 +11,10 @@ export const PamMatrixPage = () => {
             </Typography>
             <br/>
             <Typography variant={"headTitle"}>
-                Otrzymujemy na wyjściu macierz PAM 1.
+                Jednostka PAM1 jest zdefiniowana jako zamiana 1% aminokwasów albo jako jedna mutacja na 100 reszt.
+                <br/>
+                Wartości dodatnie w macierzy oznaczają substytucje zdarzające się częściej, niż oczekuje się wśród zastąpień konserwowanych ewolucyjnie.
+                Natomiast wartości ujemne odpowiadają substytucjom, które zdarzają się rzadziej, niż oczekiwano.
             </Typography>
         </div>
         <PamMatrix/>

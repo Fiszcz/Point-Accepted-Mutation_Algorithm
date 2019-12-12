@@ -29,13 +29,14 @@ export const SubstitutionMatrixPage = () => {
             <br/>
             {step === 0 && <>
                 <Typography>
-                    Na podstawie zrekonstruowanego drzewa filogenetycznego tworzona jest symetryczna macierz podstawień,
-                    zawierającą informacje o częstości występowania substytucji między symbolami.
+                    Na podstawie zrekonstruowanego drzewa filogenetycznego tworzona jest symetryczna macierz podstawień.
+                    Jest to dwuwymiarowa macierz zawierająca wartości prawdopodobieństwa zamiany jednej reszty aminokwasowej lub nukleotydowej na inną
+                    w trakcie ewolucji sekwencji.
                 </Typography>
             </>
             }
             {step === 1 && <>
-                <Divider className={css({height: '4px !important'})}/>
+                <Divider className={dividerStyle}/>
                 <br/>
                 <Typography variant={"headTitle"}>
                     Krok 1:
@@ -46,27 +47,27 @@ export const SubstitutionMatrixPage = () => {
                 </Typography>
             </>}
             {[2, 3, 4].includes(step) && <>
-                <Divider className={css({height: '4px !important'})}/>
+                <Divider className={dividerStyle}/>
                 <br/>
                 <Typography variant={"headTitle"}>
                     Krok 2:
                 </Typography>
                 <Typography>
-                    Gdy mamy już wyliczone wszystkie prawdopodobieństwa wystąpień symboli w sekwencjach możemy policzyć szacowane prawdopodobieństwa zmiany <i><b>i</b></i>-tego symbolu na <i><b>j</b></i>-ty symbol.
+                    Gdy mamy już wyliczone wszystkie prawdopodobieństwa wystąpień reszt w sekwencjach możemy policzyć szacowane prawdopodobieństwa zmiany <i><b>i</b></i>-tego symbolu na <i><b>j</b></i>-ty symbol.
                 </Typography>
             </>}
             {step === 5 && <>
-                <Divider className={css({height: '4px !important'})}/>
+                <Divider className={dividerStyle}/>
                 <br/>
                 <Typography variant={"headTitle"}>
                     Krok 3:
                 </Typography>
                 <Typography>
-                    Wyliczmy teraz wartość lamda, która posłuży nam do obliczenia ...
+                    Wyliczmy teraz wartość lamda, która posłuży nam do dalszych obliczeń
                 </Typography>
             </>}
             {step === 6 && <>
-                <Divider className={css({height: '4px !important'})}/>
+                <Divider className={dividerStyle}/>
                 <br/>
                 <Typography variant={"headTitle"}>
                     Krok 4:
@@ -76,23 +77,24 @@ export const SubstitutionMatrixPage = () => {
                 </Typography>
             </>}
             {step === 7 && <>
-                <Divider className={css({height: '4px !important'})}/>
+                <Divider className={dividerStyle}/>
                 <br/>
                 <Typography variant={"headTitle"}>
                     Krok 4:
                 </Typography>
                 <Typography>
-                    Jesteśmy już o krok od macierzy PAM
+                    Znormalizowana macierz podstawień
                 </Typography>
             </>}
             {step === 8 && <>
-                <Divider className={css({height: '4px !important'})}/>
+                <Divider className={dividerStyle}/>
                 <br/>
                 <Typography variant={"headTitle"}>
                     Krok 5:
                 </Typography>
                 <Typography>
-                    Stosujac poniższy wzór do każdej komórki macierzy otrzymamy na wyjściu macierz PAM.
+                    W macierzach substytucji do opisania prawdopodobieństwa substytucji aminokwasowych stosuje się konwersje logarytmiczne.
+                    Konwertowane wartości nazywa się logarytmami ilorazu szans - są to logarytmy stosunku częstości obserwowanych mutacji do prawdopodobieństwa losowego zaistnienia substytucji.
                 </Typography>
             </>}
         </div>
@@ -120,6 +122,10 @@ export const SubstitutionMatrixPage = () => {
         {step === 8 && <JumpToNextStep>Wyświetl macierz PAM</JumpToNextStep>}
     </div>
 };
+
+const dividerStyle = css({
+    height: '4px !important',
+});
 
 const substitutionMatrixPageStyle = css({
     display: 'grid',

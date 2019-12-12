@@ -24,18 +24,18 @@ export const SubstitutionMatrix: React.FC<SubstitutionMatrixProps> = ({step}) =>
 
     return <>
         {[2, 3].includes(step || 0) &&
-        <table className={css({margin: 'auto'})}>
+        <table className={tableStyle}>
             <tr>
                 {uniqueListOfSymbols.split('').map((symbol) => {
                     return <td
-                        className={cx(importantCell, css({width: 40 - widthOfTable, height: 40 - widthOfTable}))}>
+                        className={cx(importantCell, sizeOfCell(widthOfTable))}>
                         N <sub>{symbol}</sub>
                     </td>
                 })}
             </tr>
             <tr>
                 {occurrencesNumberOfSymbols.map((occurrencesOfSymbol) => {
-                    return <td className={cx(cellOfTable, css({width: 40 - widthOfTable, height: 40 - widthOfTable}))}>
+                    return <td className={cx(cellOfTable, sizeOfCell(widthOfTable))}>
                         {occurrencesOfSymbol}
                     </td>
                 })}
@@ -53,7 +53,7 @@ export const SubstitutionMatrix: React.FC<SubstitutionMatrixProps> = ({step}) =>
         </div>
         }
         <table>
-            <td className={cx(importantCell, css({width: 40 - widthOfTable, height: 40 - widthOfTable}))}>
+            <td className={cx(importantCell, sizeOfCell(widthOfTable))}>
                 {[2, 3, 4].includes(step || 0) ?
                     <Typography size={28 - widthOfTable} weight={"bold"}>P<sub>i→j</sub></Typography>
                     : [6, 7, 8].includes(step || 0) ?
@@ -62,7 +62,7 @@ export const SubstitutionMatrix: React.FC<SubstitutionMatrixProps> = ({step}) =>
                 }
             </td>
             {uniqueListOfSymbols.split('').map((symbol) => {
-                return <td className={cx(importantCell, css({width: 40 - widthOfTable, height: 40 - widthOfTable}))}>
+                return <td className={cx(importantCell, sizeOfCell(widthOfTable))}>
                     <Typography size={28 - widthOfTable} weight={"bold"}>{symbol}</Typography>
                 </td>;
             })}
@@ -72,10 +72,7 @@ export const SubstitutionMatrix: React.FC<SubstitutionMatrixProps> = ({step}) =>
                         {row.map((cell, indexOfColumn) => {
                             return <>
                                 {indexOfColumn === 0 &&
-                                <td className={cx(importantCell, css({
-                                    width: 40 - widthOfTable,
-                                    height: 40 - widthOfTable
-                                }))}>
+                                <td className={cx(importantCell, sizeOfCell(widthOfTable))}>
                                     <Typography size={28 - widthOfTable}
                                                 weight={"bold"}>{uniqueListOfSymbols[indexOfRow]}</Typography>
                                 </td>}
@@ -103,18 +100,12 @@ export const SubstitutionMatrix: React.FC<SubstitutionMatrixProps> = ({step}) =>
                     </tr>
                 })}
             {step === 8 && <tr>
-                <td className={cx(importantCell, css({
-                    width: 40 - widthOfTable,
-                    height: 40 - widthOfTable
-                }))}>
+                <td className={cx(importantCell, sizeOfCell(widthOfTable))}>
                     <Typography size={28 - widthOfTable}
                                 weight={"bold"}>p<sub>j</sub></Typography>
                 </td>
                 {probabilitiesOfSymbols.map((probabilityOfSymbol) => {
-                    return <td className={cx(importantCell, css({
-                        width: 40 - widthOfTable,
-                        height: 40 - widthOfTable
-                    }))}>
+                    return <td className={cx(importantCell, sizeOfCell(widthOfTable))}>
                         <Typography size={28 - widthOfTable}
                                     weight={"bold"}>{probabilityOfSymbol.toFixed(3)}</Typography>
                     </td>
@@ -123,6 +114,15 @@ export const SubstitutionMatrix: React.FC<SubstitutionMatrixProps> = ({step}) =>
         </table>
     </>
 };
+
+const tableStyle = css({
+    margin: 'auto'
+});
+
+const sizeOfCell = (widthOfTable: number) => css({
+    width: 40 - widthOfTable,
+    height: 40 - widthOfTable,
+});
 
 const importantCell = css({
     width: 40,

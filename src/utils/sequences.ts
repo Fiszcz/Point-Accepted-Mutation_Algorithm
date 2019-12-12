@@ -2,7 +2,7 @@ function randomIntFromInterval(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-const possibleCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const possibleCharacters = 'ACDEFGHIKLMNOPQRSTUVWY';
 
 export const generateRandomSequences = () => {
     const numberRandomSequences = randomIntFromInterval(6, 10);
@@ -10,7 +10,7 @@ export const generateRandomSequences = () => {
 
     let theMostPossibleCharacters = '';
     for (let i = 0; i < lengthOfSequences; i++) {
-        theMostPossibleCharacters += (theMostPossibleCharacters.length === 0 || Math.random() > 0.35) ? possibleCharacters[randomIntFromInterval(0, possibleCharacters.length-1)]
+        theMostPossibleCharacters += (theMostPossibleCharacters.length === 0 || Math.random() > 0.32) ? possibleCharacters[randomIntFromInterval(0, possibleCharacters.length-1)]
         : theMostPossibleCharacters[randomIntFromInterval(0, theMostPossibleCharacters.length - 1)];
     }
 
@@ -18,8 +18,8 @@ export const generateRandomSequences = () => {
     for (let i = 0; i < numberRandomSequences; i++) {
         let sequence = '';
         for (let n = 0; n < lengthOfSequences; n++) {
-            sequence += Math.random() > 0.70 ?
-                (Math.random() > 0.95 ? possibleCharacters[randomIntFromInterval(0, possibleCharacters.length - 1)]
+            sequence += Math.random() > 0.67 ?
+                (Math.random() > 0.92 ? possibleCharacters[randomIntFromInterval(0, possibleCharacters.length - 1)]
                     : theMostPossibleCharacters[randomIntFromInterval(0, theMostPossibleCharacters.length - 1)])
                 : theMostPossibleCharacters[n];
         }

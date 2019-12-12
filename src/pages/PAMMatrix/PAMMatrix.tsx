@@ -28,10 +28,7 @@ export const PamMatrix = () => {
     return <div>
         <table>
             <tr>
-                <td className={cx(importantCell, css({
-                    width: 40 - widthOfTable,
-                    height: 40 - widthOfTable
-                }))}>
+                <td className={cx(importantCell, sizeOfCell(widthOfTable))}>
                     <Typography size={28 - widthOfTable} weight={"bold"}>PAM1</Typography>
                 </td>
                 {uniqueListOfSymbols.split('').map((symbol) => {
@@ -47,19 +44,15 @@ export const PamMatrix = () => {
                 return <tr>
                     {row.map((cell, indexOfColumn) => {
                         return <>
-                            {indexOfColumn === 0 && <td className={cx(importantCell, css({
-                                width: 40 - widthOfTable,
-                                height: 40 - widthOfTable
-                            }))}>
+                            {indexOfColumn === 0 && <td className={cx(importantCell, sizeOfCell(widthOfTable))}>
                                 <Typography size={28 - widthOfTable}
                                             weight={"bold"}>{uniqueListOfSymbols[indexOfRow]}</Typography>
                             </td>}
-                            <td className={cx(cellOfTable, css({
-                                width: 40 - widthOfTable,
-                                height: 40 - widthOfTable,
+                            <td className={cx(cellOfTable, sizeOfCell(widthOfTable), css({
                                 backgroundColor: percentageToColor(cell > 0 ? cell / PAMMaxValue * 50 + 50 : (cell === 0 ? 50 : 50 - (cell / PAMMinValue * 50))),
                             }))}>
-                                <Typography size={25 - widthOfTable} className={css({color: isFinite(cell) ? 'white' : theme.secondaryColor})}>
+                                <Typography size={25 - widthOfTable}
+                                            className={css({color: isFinite(cell) ? 'white' : theme.secondaryColor})}>
                                     {isFinite(cell) ? cell : 0}
                                 </Typography>
                             </td>
@@ -70,6 +63,11 @@ export const PamMatrix = () => {
         </table>
     </div>;
 };
+
+const sizeOfCell = (widthOfTable: number) => css({
+    width: 40 - widthOfTable,
+    height: 40 - widthOfTable,
+});
 
 const importantCell = css({
     width: 40,

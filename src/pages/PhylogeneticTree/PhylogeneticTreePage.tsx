@@ -44,13 +44,13 @@ export const PhylogeneticTree = () => {
             {numberOfAllSubstitutions && <>
                 <br/>
                 <Typography weight={"bold"} size={20}>
-                    Liczba wszystkich subtytucji: {numberOfAllSubstitutions}
+                    Liczba wszystkich substytucji: {numberOfAllSubstitutions}
                 </Typography>
                 </>
             }
         </div>
 
-        <div className={cx(phylogeneticTreePageStyle, css({width: 1150, height: 500}))}>
+        <div className={cx(phylogeneticTreePageStyle, sizeOfPhylogeneticTree)}>
             <div id={'phylogeneticTree'}/>
         </div>
 
@@ -59,6 +59,11 @@ export const PhylogeneticTree = () => {
         </div>
     </div>
 };
+
+const sizeOfPhylogeneticTree = css({
+    width: 1150,
+    height: 500,
+});
 
 const phylogeneticTreePageStyle = css({
     display: 'grid',

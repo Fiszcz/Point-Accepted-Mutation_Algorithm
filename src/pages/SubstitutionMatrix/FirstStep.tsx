@@ -14,7 +14,7 @@ export const FirstStep = () => {
 
     const widthOfTable = uniqueListOfSymbols.length;
 
-    return <div className={css({display: 'flex', width: '100%', justifyContent: 'space-around'})}>
+    return <div className={containerStyle}>
         <div>
             <Typography variant={"subtitle"}>Lista sekwencji wejściowych:</Typography>
             <br/>
@@ -26,39 +26,39 @@ export const FirstStep = () => {
             })}
         </div>
         <div>
-            <Typography variant={"subtitle"}>Ogólna liczba symboli</Typography>
+            <Typography variant={"subtitle"}>Ogólna liczba reszt (symboli)</Typography>
             <Typography variant={"title"}>N = {lengthOfAllSequences}</Typography>
             <br/>
-            <Typography variant={"subtitle"}>Liczebność dla poszczególnych symboli:</Typography>
-            <table className={css({margin: 'auto'})}>
+            <Typography variant={"subtitle"}>Liczebność dla poszczególnych reszt:</Typography>
+            <table className={tableStyle}>
                 <tr>
                     {uniqueListOfSymbols.split('').map((symbol) => {
-                        return <td className={cx(importantCell, css({width: 40 - widthOfTable, height: 40 - widthOfTable}))}>
+                        return <td className={cx(importantCell, sizeOfCell(widthOfTable))}>
                             N <sub>{symbol}</sub>
                         </td>
                     })}
                 </tr>
                 <tr>
                     {occurrencesNumberOfSymbols.map((occurrencesOfSymbol) => {
-                        return <td className={cx(cellOfTable, css({width: 40 - widthOfTable, height: 40 - widthOfTable}))}>
+                        return <td className={cx(cellOfTable, sizeOfCell(widthOfTable))}>
                             {occurrencesOfSymbol}
                         </td>
                     })}
                 </tr>
             </table>
             <br/>
-            <Typography variant={"subtitle"}>Prawdopodobieństwa wystąpienia symbolu:</Typography>
-            <table className={css({margin: 'auto'})}>
+            <Typography variant={"subtitle"}>Prawdopodobieństwa wystąpienia reszty:</Typography>
+            <table className={tableStyle}>
                 <tr>
                     {uniqueListOfSymbols.split('').map((symbol) => {
-                        return <td className={cx(importantCell, css({width: 40 - widthOfTable, height: 40 - widthOfTable}))}>
+                        return <td className={cx(importantCell, sizeOfCell(widthOfTable))}>
                             p <sub>{symbol}</sub>
                         </td>
                     })}
                 </tr>
                 <tr>
                     {probabilitiesOfSymbols.map((probabilityOfSymbol) => {
-                        return <td className={cx(cellOfTable, css({width: 40 - widthOfTable, height: 40 - widthOfTable}))}>
+                        return <td className={cx(cellOfTable, sizeOfCell(widthOfTable))}>
                             {probabilityOfSymbol.toFixed(3)}
                         </td>
                     })}
@@ -67,6 +67,22 @@ export const FirstStep = () => {
         </div>
     </div>;
 };
+
+const tableStyle = css({
+    margin: 'auto',
+});
+
+const containerStyle = css({
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'space-around',
+});
+
+const sizeOfCell = (widthOfTable: number) => css({
+    width: 40 - widthOfTable,
+    height: 40 - widthOfTable,
+});
+
 
 const importantCell = css({
     width: 40,
