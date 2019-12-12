@@ -73,9 +73,12 @@ export const getDividedSubstitutionMatrixByOccurrences = (matrix: (number | '-')
 
 export const countAllSubstitutions = (matrix: (number | '-') [][]) => {
     let counter = 0;
-    for (let element of matrix.flat()) {
-        if (element !== '-')
-            counter += element;
+    for (let i = 1; i < matrix.length; i++) {
+        for (let j = i - 1; j >= 0; j--) {
+            const element = matrix[i][j];
+            if (element !== '-')
+                counter += element;
+        }
     }
 
     return counter;
