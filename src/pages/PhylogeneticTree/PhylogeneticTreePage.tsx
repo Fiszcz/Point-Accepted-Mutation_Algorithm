@@ -13,6 +13,7 @@ import {computeSubstitutionMatrix} from "../../actions/substitutionMatrix/substi
 
 export const PhylogeneticTree = () => {
     const sequences = useSelector((state: AppState) => state.sequences.sequences);
+    const numberOfAllSubstitutions = useSelector((state: AppState) => state.substitutionMatrix.numberOfAllSubstitutions);
     const dispatch = useDispatch();
     
     useEffect(() => {
@@ -40,6 +41,13 @@ export const PhylogeneticTree = () => {
                 topologii drzew i odtwarzaniu takich sekwencji przodków, które wymagałyby najmniejszej ilości zmian
                 ewolucyjnych prowadzących do naszego wejściowego zbioru sekwencji.
             </Typography>
+            {numberOfAllSubstitutions && <>
+                <br/>
+                <Typography weight={"bold"} size={20}>
+                    Liczba wszystkich subtytucji: {numberOfAllSubstitutions}
+                </Typography>
+                </>
+            }
         </div>
 
         <div className={cx(phylogeneticTreePageStyle, css({width: 1150, height: 500}))}>
