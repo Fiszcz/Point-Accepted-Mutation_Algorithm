@@ -27,13 +27,6 @@ export const EntrySequences = () => {
         dispatch(setSequences(generateRandomSequences()));
     };
 
-    const editSequence = (index: number, sequence: string) => {
-        if ((sequence.match(letters) && sequence.length < 14) || sequence === '') {
-            sequences[index] = sequence;
-            dispatch(setSequences([...sequences]));
-        }
-    };
-
     return <div className={entrySequencesPageStyle}>
         <div className={css({display: 'grid', gridGap: '20%', justifyItems: 'center'})}>
             <Typography variant={"headTitle"}>
@@ -48,7 +41,7 @@ export const EntrySequences = () => {
             <GenerateButton onClick={handleGenerateSequences}/>
         </div>
 
-        <EntrySequencesTable addSequence={addSequence} handleRemoveSequence={removeSequence} handleChangeSequence={editSequence}/>
+        <EntrySequencesTable addSequence={addSequence} handleRemoveSequence={removeSequence}/>
 
         <div className={goToNextStepStyle}>
             <JumpToNextStep>Tworzenie drzewa filogenetycznego</JumpToNextStep>

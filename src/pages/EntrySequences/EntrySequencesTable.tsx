@@ -1,23 +1,24 @@
 import * as React from 'react';
+import {useCallback, useState} from 'react';
 import {IconButton, Table, TableBody, TableCell, TableFooter, TableHead, TableRow, TextField} from "@material-ui/core";
 import {Add, Clear} from "@material-ui/icons";
 import {css} from "emotion";
 import {theme} from "../../components/theme";
 import {Typography} from "../../components/Typography";
-import {useCallback, useState} from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../store";
+import {setSequences} from "../../actions/sequences/sequences";
 
 export const letters = /^[A-Za-z]+$/;
 
 interface EntrySequencesTableProps {
     addSequence: (sequence: string) => void;
     handleRemoveSequence: (index: number) => () => void;
-    handleChangeSequence: (index: number, newValue: string) => void;
 }
 
 export const EntrySequencesTable: React.FC<EntrySequencesTableProps> = (props) => {
     const sequences = useSelector((state: AppState) => state.sequences.sequences);
+    const dispatch = useDispatch();
     const [newSequence, setNewSequence] = useState<string>('');
 
     const handleChangeNewSequence = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,8 +38,13 @@ export const EntrySequencesTable: React.FC<EntrySequencesTableProps> = (props) =
     };
 
     const handleChangeSequence = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-        props.handleChangeSequence(Number(event.target.name), event.target.value);
-    }, []);
+        const sequence = event.target.value;
+        const index = Number(event.target.name);
+        if ((sequence.match(letters) && sequence.length < 14) || sequence === '') {
+            sequences[index] = sequence;
+            dispatch(setSequences([...sequences]));
+        }
+    }, [sequences, dispatch]);
 
     return <div className={css({width: '100%'})}>
         <Typography weight={'bold'}>
@@ -51,7 +57,8 @@ export const EntrySequencesTable: React.FC<EntrySequencesTableProps> = (props) =
             <TableHead>
                 <TableRow>
                     <TableCell className={tableHeadCellStyle}><Typography weight={'bold'}>lp.</Typography></TableCell>
-                    <TableCell className={tableHeadCellStyle}><Typography weight={'bold'}>Sekwencja</Typography></TableCell>
+                    <TableCell className={tableHeadCellStyle}><Typography
+                        weight={'bold'}>Sekwencja</Typography></TableCell>
                     <TableCell className={tableHeadCellStyle}><Typography weight={'bold'}>Akcja</Typography></TableCell>
                 </TableRow>
             </TableHead>
@@ -62,7 +69,8 @@ export const EntrySequencesTable: React.FC<EntrySequencesTableProps> = (props) =
                             <Typography weight={'bold'}>{index + 1}</Typography>
                         </TableCell>
                         <TableCell className={tableCellStyle}>
-                            <TextField value={sequence} className={textFieldStyle} onChange={handleChangeSequence} name={index.toString()}/>
+                            <TextField value={sequence} className={textFieldStyle} onChange={handleChangeSequence}
+                                       name={index.toString()}/>
                         </TableCell>
                         <TableCell className={tableCellStyle}>
                             <IconButton onClick={props.handleRemoveSequence(index)}>
@@ -73,22 +81,22 @@ export const EntrySequencesTable: React.FC<EntrySequencesTableProps> = (props) =
                 )}
             </TableBody>
             {sequences.length < 10 &&
-                <TableFooter>
-                    <TableRow>
-                        <TableCell className={tableCellStyle}>
-                            <Typography weight={'bold'}>Nowa</Typography>
-                        </TableCell>
-                        <TableCell className={tableCellStyle}>
-                            <TextField value={newSequence} className={textFieldStyle} onChange={handleChangeNewSequence}
-                                       onKeyUp={handleDetectEnter}/>
-                        </TableCell>
-                        <TableCell className={tableCellStyle}>
-                            <IconButton onClick={addSequence}>
-                                <Add className={addSequenceButtonStyle}/>
-                            </IconButton>
-                        </TableCell>
-                    </TableRow>
-                </TableFooter>
+            <TableFooter>
+                <TableRow>
+                    <TableCell className={tableCellStyle}>
+                        <Typography weight={'bold'}>Nowa</Typography>
+                    </TableCell>
+                    <TableCell className={tableCellStyle}>
+                        <TextField value={newSequence} className={textFieldStyle} onChange={handleChangeNewSequence}
+                                   onKeyUp={handleDetectEnter}/>
+                    </TableCell>
+                    <TableCell className={tableCellStyle}>
+                        <IconButton onClick={addSequence}>
+                            <Add className={addSequenceButtonStyle}/>
+                        </IconButton>
+                    </TableCell>
+                </TableRow>
+            </TableFooter>
             }
         </Table>
     </div>;
