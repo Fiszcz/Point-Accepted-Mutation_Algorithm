@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { css, cx } from 'emotion';
 import { generateTreeDiagram } from './PhylogeneticTree';
 import { Typography } from '../../components/Typography';
-import { buildTreeDataFromGraph, createCompleteGraphFromSequences } from '../../utils/graphs';
+import { buildTreeDataFromGraph, createCompleteGraphFromSequences, reorganizeTreeForRoot } from '../../utils/graphs';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../store';
 import { primAlgorithm } from '../../utils/primAlgorithm';
@@ -18,8 +18,10 @@ export const PhylogeneticTree = () => {
 
     useEffect(() => {
         const uppercaseSequences = sequences.map(sequence => sequence.toUpperCase());
+        const numberOfSequences = uppercaseSequences.length;
         const graphFromSequences = createCompleteGraphFromSequences(uppercaseSequences);
-        const minimumSpanningTree = primAlgorithm(uppercaseSequences.length, graphFromSequences);
+        const minimumSpanningTree = primAlgorithm(numberOfSequences, graphFromSequences);
+        reorganizeTreeForRoot(minimumSpanningTree, numberOfSequences);
         const treeData = buildTreeDataFromGraph(minimumSpanningTree, uppercaseSequences);
         dispatch(setTree(treeData));
         generateTreeDiagram(treeData);

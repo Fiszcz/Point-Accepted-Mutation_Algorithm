@@ -80,3 +80,25 @@ const translateToSequences = (treeData: TreeData, sequences: string[]): TreeData
     }
     return newTree;
 };
+
+const swap = (array: any[], indexOfFirst: number, indexOfSecond: number) => {
+    const valueOfFirst = array[indexOfFirst];
+    array[indexOfFirst] = array[indexOfSecond];
+    array[indexOfSecond] = valueOfFirst;
+};
+
+export const reorganizeTreeForRoot = (graph: Graph, numberOfSequences: number) => {
+    const numberOfBranchesForVertexes: number[] = [];
+    for (let i = 0; i < numberOfSequences; i++) {
+        const numberOfBranchesForSequence = graph.filter(edge => edge[0] === i || edge[1] === i).length;
+        numberOfBranchesForVertexes.push(numberOfBranchesForSequence);
+    }
+    for (let i = 0; i < numberOfSequences; i++) {
+        if (numberOfBranchesForVertexes[i] === 2) {
+            const indexOfRootEdge = graph.findIndex(element => element[0] === i || element[1] === i);
+            swap(graph, 0, indexOfRootEdge);
+            if (graph[0][0] !== i) swap(graph[0], 0, 1);
+            return;
+        }
+    }
+};
