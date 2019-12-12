@@ -54,9 +54,7 @@ export function primAlgorithm(numberOfVertex: number, graph: Graph): Graph {
 
         // add each edge to list of potential edges
         for (let r = 0; r < numberOfVertex; r++) {
-            if (adjMatrix[vertex][r] !== 0) {
-                edges.push([vertex,r,adjMatrix[vertex][r]]);
-            }
+            edges.push([vertex,r,adjMatrix[vertex][r]]);
         }
 
         // find edge with the smallest weight to a vertex
