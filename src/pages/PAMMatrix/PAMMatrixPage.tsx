@@ -28,4 +28,5 @@ const PAMMatrixPageStyle = css({
     alignItems: 'center',
     padding: '5% 10%',
     width: '100%',
+    overflow: 'auto',
 });

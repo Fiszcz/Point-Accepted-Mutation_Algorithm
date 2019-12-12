@@ -139,4 +139,5 @@ const substitutionMatrixPageStyle = css({
     alignItems: 'center',
     padding: '5% 0%',
     width: '100%',
+    overflow: 'auto',
 });

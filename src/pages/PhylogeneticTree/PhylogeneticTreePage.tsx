@@ -29,7 +29,7 @@ export const PhylogeneticTree = () => {
     }, [sequences, dispatch]);
 
     return (
-        <div className={phylogeneticTreePageStyle}>
+        <div className={cx(phylogeneticTreePageStyle, phylogeneticTreePageContainerStyle)}>
             <div className={phylogeneticTreePageStyle}>
                 <Typography variant={'headTitle'}>Drzewo filogenetyczne</Typography>
                 <br />
@@ -72,4 +72,8 @@ const phylogeneticTreePageStyle = css({
     display: 'grid',
     justifyItems: 'center',
     alignItems: 'center',
+});
+
+const phylogeneticTreePageContainerStyle = css({
+    overflow: 'auto',
 });

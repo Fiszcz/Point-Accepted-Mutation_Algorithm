@@ -59,4 +59,5 @@ const entrySequencesPageStyle = css({
     '& > div:first-of-type': {
         marginRight: '4%',
     },
+    overflow: 'auto',
 });
