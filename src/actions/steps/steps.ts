@@ -8,19 +8,19 @@ export enum PAMSteps {
 }
 
 export interface GoToStep {
-    type: 'GO_TO',
-    step: PAMSteps,
+    type: 'GO_TO';
+    step: PAMSteps;
 }
 
 export interface GoToNextStep {
-    type: 'GO_TO_NEXT_STEP',
+    type: 'GO_TO_NEXT_STEP';
 }
 
 export type StepsActions = GoToStep | GoToNextStep;
 
 export function goToStep(step: PAMSteps): GoToStep {
     return {
-        type: "GO_TO",
+        type: 'GO_TO',
         step,
     };
 }
@@ -28,5 +28,5 @@ export function goToStep(step: PAMSteps): GoToStep {
 export function goToNextStep(): GoToNextStep {
     return {
         type: 'GO_TO_NEXT_STEP',
-    }
+    };
 }

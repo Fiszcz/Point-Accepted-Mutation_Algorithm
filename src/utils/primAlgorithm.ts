@@ -9,13 +9,14 @@ export type Graph = Edge[];
   implementing a priority queue data structure instead of a matrix
 */
 function createAdjMatrix(numberOfVertex: number, graph: Graph) {
-
     const adjMatrix: Matrix = [];
 
     // create N x N matrix filled with 0 edge weights between all vertices
     for (let i = 0; i < numberOfVertex; i++) {
         adjMatrix.push([]);
-        for (let j = 0; j < numberOfVertex; j++) { adjMatrix[i].push(0); }
+        for (let j = 0; j < numberOfVertex; j++) {
+            adjMatrix[i].push(0);
+        }
     }
 
     // populate adjacency matrix with correct edge weights
@@ -25,11 +26,9 @@ function createAdjMatrix(numberOfVertex: number, graph: Graph) {
     }
 
     return adjMatrix;
-
 }
 
 export function primAlgorithm(numberOfVertex: number, graph: Graph): Graph {
-
     // create adj matrix from graph
     const adjMatrix = createAdjMatrix(numberOfVertex, graph);
 
@@ -41,26 +40,28 @@ export function primAlgorithm(numberOfVertex: number, graph: Graph): Graph {
     const edges: Edge[] = [];
     const visited = [];
     const degreesOfVisited = [];
-    for (let i = 0; i < numberOfVertex; i++)
-        degreesOfVisited.push(0);
-    let minEdge: Edge = [-1,-1,Infinity];
+    for (let i = 0; i < numberOfVertex; i++) degreesOfVisited.push(0);
+    let minEdge: Edge = [-1, -1, Infinity];
 
     // run prim's algorithm until we create an minimumSpanningTree
     // that contains every vertex from the graph
-    while (minimumSpanningTree.length !== numberOfVertex-1) {
-
+    while (minimumSpanningTree.length !== numberOfVertex - 1) {
         // mark this vertex as visited
         visited.push(vertex);
 
         // add each edge to list of potential edges
         for (let r = 0; r < numberOfVertex; r++) {
-            edges.push([vertex,r,adjMatrix[vertex][r]]);
+            edges.push([vertex, r, adjMatrix[vertex][r]]);
         }
 
         // find edge with the smallest weight to a vertex
         // that has not yet been visited
         for (let e = 0; e < edges.length; e++) {
-            if (edges[e][2] < minEdge[2] && visited.indexOf(edges[e][1]) === -1 && checkLeafRuleOfPhylogeneticTree(degreesOfVisited, edges, edges[e])) {
+            if (
+                edges[e][2] < minEdge[2] &&
+                visited.indexOf(edges[e][1]) === -1 &&
+                checkLeafRuleOfPhylogeneticTree(degreesOfVisited, edges, edges[e])
+            ) {
                 minEdge = edges[e];
             }
         }
@@ -76,12 +77,10 @@ export function primAlgorithm(numberOfVertex: number, graph: Graph): Graph {
 
         // start at new vertex and reset min edge
         vertex = minEdge[1];
-        minEdge = [-1,-1,Infinity];
-
+        minEdge = [-1, -1, Infinity];
     }
 
     return minimumSpanningTree;
-
 }
 
 const checkLeafRuleOfPhylogeneticTree = (degreesOfVisited: number[], edges: Edge[], currentEdge: Edge) => {

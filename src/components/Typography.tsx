@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {css, cx} from "emotion";
+import { css, cx } from 'emotion';
 
 type typographyVariants = 'title' | 'headTitle' | 'subtitle' | 'text';
 
@@ -13,10 +13,20 @@ interface TypographyProps {
     className?: string;
 }
 
-export const Typography: React.FC<TypographyProps> = ({variant = 'text', size, weight, children, className}) => {
-    return <p className={cx(typographyStyle, typographyVariantStyles[variant], size ? typographySizeStyle(size) : '', weight ? typographyWeightStyle[weight] : '', className)}>
-        {children}
-    </p>
+export const Typography: React.FC<TypographyProps> = ({ variant = 'text', size, weight, children, className }) => {
+    return (
+        <p
+            className={cx(
+                typographyStyle,
+                typographyVariantStyles[variant],
+                size ? typographySizeStyle(size) : '',
+                weight ? typographyWeightStyle[weight] : '',
+                className,
+            )}
+        >
+            {children}
+        </p>
+    );
 };
 
 const typographyStyle = css({
@@ -44,7 +54,7 @@ const typographyVariantStyles = {
     }),
 };
 
-const typographySizeStyle = (size: number) => css({fontSize: size});
+const typographySizeStyle = (size: number) => css({ fontSize: size });
 
 const typographyWeightStyle = {
     bold: css({

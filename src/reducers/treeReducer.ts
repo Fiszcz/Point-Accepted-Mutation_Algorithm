@@ -1,12 +1,12 @@
-import {SetTree} from "../actions/tree/tree";
+import { SetTree } from '../actions/tree/tree';
 
 const initialState = {
-    tree: {name: ''},
+    tree: { name: '' },
 };
 
 export function treeReducer(state = initialState, action: SetTree) {
     if (action.tree) {
-        return {tree: action.tree};
+        return { tree: action.tree };
     }
     return state;
 }

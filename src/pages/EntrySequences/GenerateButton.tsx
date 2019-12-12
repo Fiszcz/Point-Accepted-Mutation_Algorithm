@@ -1,18 +1,20 @@
 import * as React from 'react';
-import {Typography} from "../../components/Typography";
-import {css} from "emotion";
-import {theme} from "../../components/theme";
+import { Typography } from '../../components/Typography';
+import { css } from 'emotion';
+import { theme } from '../../components/theme';
 
 interface GenerateButtonProps {
     onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export const GenerateButton: React.FC<GenerateButtonProps> = ({onClick}) => {
-    return <button className={generateButtonStyle} onClick={onClick}>
-        <Typography weight={'bold'} size={14}>
-            WYGENERUJ SEKWENCJE
-        </Typography>
-    </button>
+export const GenerateButton: React.FC<GenerateButtonProps> = ({ onClick }) => {
+    return (
+        <button className={generateButtonStyle} onClick={onClick}>
+            <Typography weight={'bold'} size={14}>
+                WYGENERUJ SEKWENCJE
+            </Typography>
+        </button>
+    );
 };
 
 const generateButtonStyle = css({

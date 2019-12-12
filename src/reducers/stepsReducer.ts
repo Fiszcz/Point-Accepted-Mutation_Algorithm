@@ -1,4 +1,4 @@
-import {PAMSteps, StepsActions} from "../actions/steps/steps";
+import { PAMSteps, StepsActions } from '../actions/steps/steps';
 
 const initialState = {
     step: PAMSteps.WSTEP,
@@ -6,11 +6,11 @@ const initialState = {
 
 export function stepsReducer(state = initialState, action: StepsActions) {
     switch (action.type) {
-        case "GO_TO":
+        case 'GO_TO':
             return {
                 step: action.step,
             };
-        case "GO_TO_NEXT_STEP":
+        case 'GO_TO_NEXT_STEP':
             return {
                 step: state.step + 1,
             };

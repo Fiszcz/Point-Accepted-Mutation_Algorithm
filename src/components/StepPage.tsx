@@ -1,15 +1,13 @@
 import * as React from 'react';
-import {css, cx} from "emotion";
-import {theme} from "./theme";
+import { css, cx } from 'emotion';
+import { theme } from './theme';
 
 interface StepPageProps {
     className?: string;
 }
 
-export const StepPage: React.FC<StepPageProps> = ({children, className}) => {
-    return <div className={cx(stepPageStyle, className)}>
-        {children}
-    </div>
+export const StepPage: React.FC<StepPageProps> = ({ children, className }) => {
+    return <div className={cx(stepPageStyle, className)}>{children}</div>;
 };
 
 const stepPageStyle = css({

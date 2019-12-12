@@ -10,18 +10,22 @@ export const generateRandomSequences = () => {
 
     let theMostPossibleCharacters = '';
     for (let i = 0; i < lengthOfSequences; i++) {
-        theMostPossibleCharacters += (theMostPossibleCharacters.length === 0 || Math.random() > 0.40) ? possibleCharacters[randomIntFromInterval(0, possibleCharacters.length-1)]
-        : theMostPossibleCharacters[randomIntFromInterval(0, theMostPossibleCharacters.length - 1)];
+        theMostPossibleCharacters +=
+            theMostPossibleCharacters.length === 0 || Math.random() > 0.4
+                ? possibleCharacters[randomIntFromInterval(0, possibleCharacters.length - 1)]
+                : theMostPossibleCharacters[randomIntFromInterval(0, theMostPossibleCharacters.length - 1)];
     }
 
     const sequences = [];
     for (let i = 0; i < numberRandomSequences; i++) {
         let sequence = '';
         for (let n = 0; n < lengthOfSequences; n++) {
-            sequence += Math.random() > 0.75 ?
-                (Math.random() > 0.97 ? possibleCharacters[randomIntFromInterval(0, possibleCharacters.length - 1)]
-                    : theMostPossibleCharacters[randomIntFromInterval(0, theMostPossibleCharacters.length - 1)])
-                : theMostPossibleCharacters[n];
+            sequence +=
+                Math.random() > 0.75
+                    ? Math.random() > 0.97
+                        ? possibleCharacters[randomIntFromInterval(0, possibleCharacters.length - 1)]
+                        : theMostPossibleCharacters[randomIntFromInterval(0, theMostPossibleCharacters.length - 1)]
+                    : theMostPossibleCharacters[n];
         }
         sequences.push(sequence);
     }
@@ -31,9 +35,8 @@ export const generateRandomSequences = () => {
 
 export const countSubstitutionsBetweenSequences = (firstSequence: string, secondSequence: string) => {
     let substitutions = 0;
-    for (let char = 0; char < firstSequence.length; char++){
-        if (firstSequence[char] !== secondSequence[char])
-            substitutions++;
+    for (let char = 0; char < firstSequence.length; char++) {
+        if (firstSequence[char] !== secondSequence[char]) substitutions++;
     }
     return substitutions;
 };

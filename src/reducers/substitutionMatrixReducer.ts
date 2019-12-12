@@ -1,4 +1,4 @@
-import {SubstitutionMatrixActions} from "../actions/substitutionMatrix/substitutionMatrix";
+import { SubstitutionMatrixActions } from '../actions/substitutionMatrix/substitutionMatrix';
 import {
     computeLambdaForPAM1,
     computeMatrixOneStepBeforePAM1,
@@ -9,8 +9,8 @@ import {
     countOccurrencesOfSymbols,
     getDividedSubstitutionMatrixByOccurrences,
     getUniqueSymbols,
-    mapPhylogeneticTreeToSubstitutionMatrix
-} from "../model/substitutionMatrix";
+    mapPhylogeneticTreeToSubstitutionMatrix,
+} from '../model/substitutionMatrix';
 
 interface SubstitutionMatrixState {
     substitutionMatrix: (number | '-')[][];
@@ -19,9 +19,9 @@ interface SubstitutionMatrixState {
     occurrencesNumberOfSymbols: number[];
     probabilitiesOfSymbols: number[];
     numberOfAllSubstitutions: number;
-    matrixWithDividedValuesByOccurrences: (number | '-') [][];
+    matrixWithDividedValuesByOccurrences: (number | '-')[][];
     lambda: number;
-    matrixOneStepBeforePAM1: number [][];
+    matrixOneStepBeforePAM1: number[][];
     PAM1Matrix: number[][];
 }
 
@@ -38,19 +38,26 @@ const initialState: SubstitutionMatrixState = {
     lengthOfAllSequences: 0,
 };
 
-export const substitutionMatrixReduce = (state: SubstitutionMatrixState = initialState, action: SubstitutionMatrixActions): SubstitutionMatrixState => {
-    if (action.type === "COMPUTE_SUBSTITUTION_MATRIX") {
+export const substitutionMatrixReduce = (
+    state: SubstitutionMatrixState = initialState,
+    action: SubstitutionMatrixActions,
+): SubstitutionMatrixState => {
+    if (action.type === 'COMPUTE_SUBSTITUTION_MATRIX') {
         const uniqueListOfSymbols = getUniqueSymbols(action.sequences);
         const substitutionMatrix = mapPhylogeneticTreeToSubstitutionMatrix(action.phylogeneticTree, uniqueListOfSymbols);
         const lengthOfAllSequences = countLengthOfAllSequences(action.sequences);
         const occurrencesNumberOfSymbols = countOccurrencesOfSymbols(action.sequences, uniqueListOfSymbols);
         const probabilitiesOfSymbols = computeProbabilityOfSymbols(occurrencesNumberOfSymbols, lengthOfAllSequences);
-        const matrixWithDividedValuesByOccurrences = getDividedSubstitutionMatrixByOccurrences(substitutionMatrix, occurrencesNumberOfSymbols);
+        const matrixWithDividedValuesByOccurrences = getDividedSubstitutionMatrixByOccurrences(
+            substitutionMatrix,
+            occurrencesNumberOfSymbols,
+        );
         const numberOfAllSubstitutions = countAllSubstitutions(substitutionMatrix);
         const lambda = computeLambdaForPAM1(lengthOfAllSequences, numberOfAllSubstitutions);
         const matrixOneStepBeforePAM1 = computeMatrixOneStepBeforePAM1(matrixWithDividedValuesByOccurrences, lambda);
         const PAM1Matrix = computePAM1(matrixOneStepBeforePAM1, probabilitiesOfSymbols);
-        return {substitutionMatrix,
+        return {
+            substitutionMatrix,
             uniqueListOfSymbols,
             lengthOfAllSequences,
             occurrencesNumberOfSymbols,

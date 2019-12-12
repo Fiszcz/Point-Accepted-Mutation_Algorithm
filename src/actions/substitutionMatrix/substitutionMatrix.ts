@@ -1,8 +1,8 @@
-import {TreeData} from "../../utils/graphs";
+import { TreeData } from '../../utils/graphs';
 
 interface ComputeSubstitutionMatrix {
-    type: 'COMPUTE_SUBSTITUTION_MATRIX',
-    phylogeneticTree: TreeData,
+    type: 'COMPUTE_SUBSTITUTION_MATRIX';
+    phylogeneticTree: TreeData;
     sequences: string[];
 }
 
@@ -13,5 +13,5 @@ export const computeSubstitutionMatrix = (phylogeneticTree: TreeData, sequences:
         type: 'COMPUTE_SUBSTITUTION_MATRIX',
         phylogeneticTree,
         sequences,
-    }
+    };
 };
