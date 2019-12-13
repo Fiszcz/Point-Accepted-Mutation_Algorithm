@@ -34,21 +34,14 @@ export const Navigation: React.FC = () => {
                     >
                         {currentStep === index ? <SelectedDotIndicator /> : <DotIndicator />}
                         <Typography size={18} weight={'light'} className={cx(stepText, isDisabled && css({ color: '#797979ba' }))}>
-                            {step}
+                            {index}. {step}
                         </Typography>
                     </div>
                 );
             })}
-            <DotConnector />
         </nav>
     );
 };
-
-const DotConnector: React.FC = () => (
-    <svg height="390" className={css({ position: 'absolute', top: 5, left: 20, width: 1 })}>
-        <line x1="0" y1="0" x2="0" y2="300" className={css({ stroke: 'white', strokeWidth: 2 })} />
-    </svg>
-);
 
 const DotIndicator: React.FC = () => <span className={dotIndicatorStyle} />;
 
@@ -73,7 +66,7 @@ const stepText = css({
 
 const dotIndicatorStyle = css({
     height: 25,
-    width: 25,
+    minWidth: 25,
     backgroundColor: 'white',
     borderRadius: '50%',
     display: 'inline-block',
@@ -84,7 +77,7 @@ const dotIndicatorStyle = css({
 
 const selectedDotIndicatorStyle = css({
     height: 25,
-    width: 25,
+    minWidth: 25,
     borderRadius: '50%',
     display: 'inline-block',
     backgroundColor: theme.secondaryColor,
