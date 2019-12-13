@@ -13,6 +13,10 @@ export const EntrySequences = () => {
     const sequences = useSelector((state: AppState) => state.sequences.sequences);
     const dispatch = useDispatch();
 
+    const hasMinimumNumberOfSequences = sequences.length > 2;
+    const hasValidLengthOfSequences = sequences.every(sequence => sequence.length === sequences[0].length);
+    const isFormValid = hasValidLengthOfSequences && hasMinimumNumberOfSequences;
+
     const removeSequence = (index: number) => () => {
         sequences.splice(index, 1);
         dispatch(setSequences([...sequences]));
@@ -37,16 +41,27 @@ export const EntrySequences = () => {
                 </Typography>
 
                 <GenerateButton onClick={handleGenerateSequences} />
+
+                {!hasMinimumNumberOfSequences && (
+                    <Typography className={validationMessage}>Należy podać przynajmniej trzy sekwencje żeby przejść dalej</Typography>
+                )}
+                {!hasValidLengthOfSequences && (
+                    <Typography className={validationMessage}>Wszystkie sekwencje powinny mieć tą samą długość</Typography>
+                )}
             </div>
 
             <EntrySequencesTable addSequence={addSequence} handleRemoveSequence={removeSequence} />
 
             <div className={goToNextStepStyle}>
-                <JumpToNextStep>Tworzenie drzewa filogenetycznego</JumpToNextStep>
+                <JumpToNextStep disabled={!isFormValid}>Tworzenie drzewa filogenetycznego</JumpToNextStep>
             </div>
         </div>
     );
 };
+
+const validationMessage = css({
+    color: '#ff000096',
+});
 
 const goToNextStepStyle = css({ gridColumn: '1 / span 2', alignSelf: 'end' });
 

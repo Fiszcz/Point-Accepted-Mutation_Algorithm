@@ -6,7 +6,11 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import { useDispatch } from 'react-redux';
 import { goToNextStep } from '../actions/steps/steps';
 
-export const JumpToNextStep: React.FC = ({ children }) => {
+interface JumpToNextStepProps {
+    disabled?: boolean;
+}
+
+export const JumpToNextStep: React.FC<JumpToNextStepProps> = ({ children, disabled }) => {
     const dispatch = useDispatch();
 
     const handleNextStep = () => {
@@ -14,17 +18,31 @@ export const JumpToNextStep: React.FC = ({ children }) => {
     };
 
     return (
-        <div className={jumpToNextStepStyle} onClick={handleNextStep}>
-            <Typography className={css({ color: theme.firstColor })}>{children}</Typography>
-            <ExpandMore className={css({ fontSize: '50px !important', color: theme.firstColor })} />
+        <div className={jumpToNextStepStyle(disabled)} onClick={!disabled ? handleNextStep : () => {}}>
+            <Typography className={contentStyle(disabled)}>{children}</Typography>
+            <ExpandMore className={expandMoreIconStyle(disabled)} />
         </div>
     );
 };
 
-const jumpToNextStepStyle = css({
-    alignSelf: 'end',
-    cursor: 'pointer',
-    '&:hover > *': {
-        textDecoration: 'underline',
-    },
-});
+const contentStyle = (disabled?: boolean) =>
+    css({
+        color: disabled ? theme.secondaryColor : theme.firstColor,
+    });
+
+const expandMoreIconStyle = (disabled?: boolean) =>
+    css({
+        fontSize: '50px !important',
+        color: disabled ? theme.secondaryColor : theme.firstColor,
+    });
+
+const jumpToNextStepStyle = (disabled?: boolean) =>
+    css({
+        alignSelf: 'end',
+        cursor: 'pointer',
+        '&:hover > *': disabled
+            ? {}
+            : {
+                  textDecoration: 'underline',
+              },
+    });
