@@ -41,9 +41,9 @@ export const SubstitutionMatrixPage = () => {
                         <br />
                         <Typography variant={'headTitle'}>Krok 1:</Typography>
                         <Typography>
-                            Zanim przejdziemy do dalszych obliczeń musimy policzyć prawdopodieństwa wystąpienia danych symboli w
-                            sekwencjach. Do tego celu potrzebujemy sumę wszystkich symboli z sekwencji wejściowych, oraz sumę wystąpień dla
-                            poszczególnych symboli.
+                            Zanim przejdziemy do dalszych obliczeń policzmy prawdopodieństwa wystąpienia danych reszt (symboli) w
+                            sekwencjach. Do tego celu potrzebujemy sumę wszystkich reszt z sekwencji wejściowych, oraz sumę wystąpień dla
+                            poszczególnych reszt.
                         </Typography>
                     </>
                 )}

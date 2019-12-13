@@ -36,8 +36,8 @@ export const PhylogeneticTree = () => {
                 <Typography variant={'headTitle'}>Drzewo filogenetyczne</Typography>
                 <br />
                 <Typography>
-                    Na podstawie sekwencji wejściowych następuje etap rekonstruowania drzewo filogenetycznego. Drzewo takie można
-                    wykorzystać algorytm maksymalnej parsymonii.
+                    Na podstawie sekwencji wejściowych następuje etap rekonstruowania drzewo filogenetycznego. Drzewo takie tworzy się
+                    wykorzystując algorytm maksymalnej parsymonii.
                     <br />
                     <br />
                     Budowanie drzewa zgodnego z zasadą maksymalnej parsymonii polega na wyszukiwaniu wszystkich możliwych topologii drzew i
