@@ -9,8 +9,9 @@ import { AppState } from '../store';
 
 export const Navigation: React.FC = () => {
     const currentStep = useSelector((state: AppState) => state.steps.step);
-    const hasSequences = useSelector((state: AppState) => state.sequences.sequences.length);
-    const hasComputedSubstitutionMatrix = useSelector((state: AppState) => state.substitutionMatrix.substitutionMatrix.length);
+    const hasComputedSubstitutionMatrix = useSelector((state: AppState) => state.sequences.areComputed);
+    const sequences = useSelector((state: AppState) => state.sequences.sequences);
+    const hasValidSequences = sequences.length > 2 && sequences.every(sequence => sequence.length === sequences[0].length);
 
     const dispatch = useDispatch();
 
@@ -22,7 +23,7 @@ export const Navigation: React.FC = () => {
         <nav className={css({ position: 'relative' })}>
             {Steps.map((step, index) => {
                 const isDisabled =
-                    (index > PAMSteps.SEKWENCJE_WEJSCIOWE && !hasSequences) ||
+                    (index > PAMSteps.SEKWENCJE_WEJSCIOWE && !hasValidSequences) ||
                     (index > PAMSteps.DRZEWO_FILOGENETYCZNE && !hasComputedSubstitutionMatrix);
 
                 return (

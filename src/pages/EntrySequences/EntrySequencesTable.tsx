@@ -68,7 +68,7 @@ export const EntrySequencesTable: React.FC<EntrySequencesTableProps> = props => 
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {sequences.map((sequence, index) => (
+                    {sequences.map((sequence: string, index) => (
                         <TableRow key={index}>
                             <TableCell className={tableCellStyle}>
                                 <Typography weight={'bold'}>{index + 1}</Typography>

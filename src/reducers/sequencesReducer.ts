@@ -1,17 +1,22 @@
-import { SetSequences } from '../actions/sequences/sequences';
-import { getUniqueSymbols } from '../model/substitutionMatrix';
+import { SequenceActions } from '../actions/sequences/sequences';
 
 interface SequencesState {
     sequences: string[];
-    uniqueSymbols: string;
+    areComputed: boolean;
 }
 
 const initialState: SequencesState = {
     sequences: [],
-    uniqueSymbols: '',
+    areComputed: false,
 };
 
-export function sequencesReducer(state = initialState, action: SetSequences) {
-    if (action.type === 'SET_SEQUENCES') return { sequences: action.sequences, uniqueSymbols: getUniqueSymbols(action.sequences) };
-    return state;
+export function sequencesReducer(state = initialState, action: SequenceActions) {
+    switch (action.type) {
+        case 'SET_SEQUENCES':
+            return { sequences: action.sequences, areComputed: false };
+        case 'SET_SEQUENCES_AS_COMPUTED':
+            return { ...state, areComputed: true };
+        default:
+            return state;
+    }
 }

@@ -14,7 +14,7 @@ export const EntrySequences = () => {
     const dispatch = useDispatch();
 
     const hasMinimumNumberOfSequences = sequences.length > 2;
-    const hasValidLengthOfSequences = sequences.every(sequence => sequence.length === sequences[0].length);
+    const hasValidLengthOfSequences = sequences.every((sequence: string) => sequence.length === sequences[0].length);
     const isFormValid = hasValidLengthOfSequences && hasMinimumNumberOfSequences;
 
     const removeSequence = (index: number) => () => {

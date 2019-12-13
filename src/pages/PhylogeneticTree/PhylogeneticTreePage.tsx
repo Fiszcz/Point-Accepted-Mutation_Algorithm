@@ -10,6 +10,7 @@ import { primAlgorithm } from '../../utils/primAlgorithm';
 import { JumpToNextStep } from '../../components/JumpToNextStep';
 import { setTree } from '../../actions/tree/tree';
 import { computeSubstitutionMatrix } from '../../actions/substitutionMatrix/substitutionMatrix';
+import { setSequencesAsComputed } from '../../actions/sequences/sequences';
 
 export const PhylogeneticTree = () => {
     const sequences = useSelector((state: AppState) => state.sequences.sequences);
@@ -26,6 +27,7 @@ export const PhylogeneticTree = () => {
         dispatch(setTree(treeData));
         generateTreeDiagram(treeData);
         dispatch(computeSubstitutionMatrix(treeData, uppercaseSequences));
+        dispatch(setSequencesAsComputed());
     }, [sequences, dispatch]);
 
     return (
