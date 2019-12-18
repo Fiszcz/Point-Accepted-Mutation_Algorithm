@@ -27,7 +27,7 @@ export const ThirdStep = () => {
                     {React.createElement(
                         Latex,
                         null,
-                        'Liczba wszystkich substytucji: $\\sum\\sum A_{ij} = ' + numberOfAllSubstitutions + '$',
+                        'Suma wszystkich komórek macierzy podstawień: $\\sum\\sum A_{ij} = ' + numberOfAllSubstitutions * 2 + '$',
                     )}
                 </div>
                 <br />
@@ -37,7 +37,7 @@ export const ThirdStep = () => {
                     {React.createElement(
                         Latex,
                         null,
-                        '$\\lambda = 0.01 \\frac {' + lengthOfAllSequences + '} {' + numberOfAllSubstitutions + '}$',
+                        '$\\lambda = 0.01 \\frac {' + lengthOfAllSequences + '} {' + numberOfAllSubstitutions * 2 + '}$',
                     )}
                 </div>
                 <br />

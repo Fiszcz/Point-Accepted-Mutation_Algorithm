@@ -83,7 +83,7 @@ export const countAllSubstitutions = (matrix: (number | '-')[][]) => {
 };
 
 export const computeLambdaForPAM1 = (lengthOfAllSequences: number, numberOfAllSubstitutions: number) => {
-    return (0.01 * lengthOfAllSequences) / numberOfAllSubstitutions;
+    return (0.01 * lengthOfAllSequences) / (numberOfAllSubstitutions * 2);
 };
 
 export const computeMatrixOneStepBeforePAM1 = (matrix: (number | '-')[][], lambda: number): number[][] => {
