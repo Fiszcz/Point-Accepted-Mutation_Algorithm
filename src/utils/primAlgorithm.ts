@@ -13,7 +13,7 @@ function createAdjMatrix(numberOfVertex: number, graph: Graph) {
     for (let i = 0; i < numberOfVertex; i++) {
         adjMatrix.push([]);
         for (let j = 0; j < numberOfVertex; j++) {
-            adjMatrix[i].push(0);
+            adjMatrix[i].push(Infinity);
         }
     }
 

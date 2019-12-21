@@ -51,7 +51,7 @@ export const buildTreeDataFromGraph = (graph: Graph, sequences: string[]): TreeD
     return translateToSequences(treeData, sequences);
 };
 
-const searchInTree = function(node: TreeData | undefined, key: string): TreeData | undefined {
+export const searchInTree = function(node: TreeData | undefined, key: string): TreeData | undefined {
     if (node === undefined) return undefined;
     else if (node.name === key) return node;
     else {
@@ -66,7 +66,7 @@ const searchInTree = function(node: TreeData | undefined, key: string): TreeData
 };
 
 const translateToSequences = (treeData: TreeData, sequences: string[]): TreeData => {
-    const newTree = { name: sequences[Number(treeData.name)], parent: '', children: treeData.children };
+    const newTree = { name: sequences[Number(treeData.name)], children: treeData.children };
     if (treeData.children) {
         if (treeData.children[0]) {
             newTree.children = [translateToSequences(treeData.children[0], sequences)];
